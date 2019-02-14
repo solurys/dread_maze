@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Phaser - Gamepad Tutorial</title>
+        <script type="text/javascript" src="../phaser.js"></script>
+        <style type="text/css">
+            body {
+                margin: 0;
+            }
+        </style>
+        
+        <script>
+            var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+
+            /**
+             * chargement des ressources
+             */
+            function preload() {
+                game.load.image('phaser', 'assets/phaser-dude.png'); // le bonhomme
+            }
+            
+            /// les boutons de la manette
+            // a chaque bouton du gamepad est associé un entier
+            // c'est ce numero qui à passer en parametre aux methodes de SinglePad
+            // afin de recuperer l'etat de chaque bouton
+            const PAD_A = 0;
+            const PAD_B = 1;
+            const PAD_X = 2;
+            const PAD_Y = 3;
+            const PAD_LB = 4;
+            const PAD_RB = 5;
+            const PAD_LT= 6;
+            const PAD_RT = 7;
+            const PAD_START = 10;
+            const PAD_SELECT = 11;
+            const PAD_AXIS_X = 0;
+            const PAD_AXIS_Y = 1;
+
+            /// le joueur 1
+            // Instance de Sprite
+            var player1;
+            
+            /// la manette 1
+            // instance de SinglePad
+            var pad1;
+
+            /**
+             * creation du monde
+             */
+            function create() {
+
+                game.stage.backgroundColor = '#736357';
+
+                //le joueur
+                player1 = game.add.sprite(400, 300, 'phaser');
+                player1.anchor.setTo(0.5,0.5);
+
+                //demarre le systeme de gamepad
+                game.input.gamepad.start();
+
+                // recupere le gamepad via game.input.gamepad.padX, pour X dans [1-4]
+                pad1 = game.input.gamepad.pad1;
+            }
+            
+            /**
+             * fonction de mise à jour du jeu
+             */
+            function update() {
+                 
+                /*  Gestion des Axes de direction
+                    cf. Phaser.SinglePad.axis http://phaser.io/docs/2.6.2/Phaser.SinglePad.html#axis
+                 */
+                var xAxis = pad1.axis(PAD_AXIS_X);
+                var yAxis = pad1.axis(PAD_AXIS_Y);
+                
+                if (xAxis < -0.1) {
+                    player1.x--;
+                    console.log('gauche');
+                }
+                else if (xAxis > 0.1) {
+                    player1.x++; 
+                    console.log('droite');
+                }
+
+                if (yAxis< -0.1) {
+                    player1.y--;
+                    console.log('haut');
+                }
+                else if (yAxis > 0.1) {
+                    player1.y++;
+                    console.log('bas');
+                }
+                
+                /*  Gestion des boutons
+                    cf. Phaser.SinglePad.justPressed http://phaser.io/docs/2.6.2/Phaser.SinglePad.html#justPressed
+                    il existe aussi justReleased, isDown, isUp..
+                 */
+                if (pad1.justPressed(PAD_A, 50)) {
+                    player1.angle += 5;
+                    console.log('A');
+                }
+                if (pad1.justPressed(PAD_B)) {
+                    player1.angle -= 5;
+                    console.log('B');
+                }
+                if (pad1.isDown(PAD_X)) {
+                    player1.scale.x += 0.01;
+                    player1.scale.y = player1.scale.x;
+                    console.log('X');
+                }
+                if (pad1.justPressed(PAD_Y)) {
+                    player1.scale.x -= 0.01;
+                    player1.scale.y = player1.scale.x;
+                    console.log('Y');
+                }
+                if (pad1.justPressed(PAD_LT)) {
+                    console.log('left trigger');
+                }
+                //...
+                if(pad1.justPressed(PAD_START)) {
+                    //reset du joueur
+                    player1.scale.x = 1;
+                    player1.scale.y = 1;
+                    
+                    player1.angle = 0;
+                    
+                    player1.x = 400;
+                    player1.y = 300;
+                    console.log('start');
+                }
+            }
+
+            
+            function render() {
+                // game.debug.text(pad1)
+            }
+
+        </script>
+        
+    </head>
+    <body>
+<p>Clic droit &gt; Afficher la source ;)
+    </body>
+</html>
