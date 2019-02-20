@@ -1,7 +1,7 @@
 class Projectile extends Entity {
-  constructor(game, x, y, key, frame) {
-    super(game, x, y, key, frame);
+  constructor(game, config) {
+    super(game, config);
   }
-  
+
   hit(entity) {}
 }
