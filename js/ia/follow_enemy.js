@@ -8,7 +8,8 @@ class FollowEnemy extends IA {
       filterTargets(this.self, this.enemies)
         .alive()
         .nearby(200)
-        .first(); // pas forcément le plus proche (sortByDistance)
+        .sortByDistance()
+        .first();
     if (target !== undefined) {
       var speed = 100;
       var dir = Vector.from(this.self, target).normalize().multiply(speed);
