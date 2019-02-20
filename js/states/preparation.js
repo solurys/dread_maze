@@ -1,6 +1,7 @@
 class PreparationState extends Phaser.State {
   create(game) {
     // temporaire
+    
     var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
     sw1.ia = new KeyboardArrowControl(sw1);
 
@@ -9,6 +10,9 @@ class PreparationState extends Phaser.State {
 
     var sw3 = game.entityManager.add(new Swordsman(game, 200, 200));
     sw3.ia = new KeyboardZQSDControl(sw3);
+
+    var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
+    sw4.ia = new FollowEnemy(sw4, [game.entityManager.adventurers]);
 
     game.state.start('fight', false);
   }
