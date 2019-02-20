@@ -1,7 +1,7 @@
 class PreparationState extends Phaser.State {
   create(game) {
     // temporaire
-    
+
     var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
     sw1.ia = new KeyboardArrowControl(sw1);
 
