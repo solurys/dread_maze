@@ -2,54 +2,55 @@ class FilterTargets {
   constructor(self, targets) {
     this.self = self;
     this.poss = [];
-    this.filters = [];
     for (var t of targets) {
-      if      (t instanceof Phaser.Group) this.poss.push(...t.children);
-      else if (t instanceof Array)        this.poss.push(...t);
-      else                                this.poss.push(t);
+      if      (t instanceof Phaser.Group)  this.poss.push(...t.children);
+      else if (t instanceof Array)         this.poss.push(...t);
+      else if (t instanceof FilterTargets) this.poss.push(...t.poss);
+      else                                 this.poss.push(t);
     }
-    // enlever self des targets
-    for (var i = this.poss.length - 1; i >= 0; i--)
-      if (this.poss[i] === self)
-        this.poss.splice(i, 1);
+    // enlever les duplications des targets et self
+    var set = new Set(this.poss);
+    set.delete(self);
+    this.poss = [...set];
   }
+  clone() {
+    return new FilterTargets(this.self, [this.poss]);
+  }
+  split() {
+    return this.clone();
+  }
+  static merge(...filterResults) {
+    return new FilterTargets(this.self, filterResults);
+  }
+  // accesseurs
   first() {
-    if (this.filters.length === 0)
-      return this.poss[0];
-    var first;
-    var i = 0;
-    while (i < this.poss.length && !this.filters.every(f => f(this.poss[i])))
-      i++;
-    first = this.poss[i];
-    return first; // peut être undefined
+    return this.poss[0];
   }
   last() {
-    if (this.filters.length === 0)
-      return this.poss[this.poss.length - 1];
-    var last;
-    for (var i = 0; i < this.poss.length; i++)
-      if (this.filters.every(f => f(this.poss[i])))
-        last = this.poss[i];
-    return last; // peut être undefined
+    return this.poss[this.poss.length - 1];
   }
   toArray() {
-    this.evalFilters();
     return this.poss;
   }
-  // méthode interne pour appliquer les filtres stockés
-  evalFilters() {
-    if (this.filters.length > 0) {
-      this.poss = this.poss.filter(e =>
-        this.filters.every(f => f(e))
-      );
-      this.filters = [];
-    }
-  }
-  // lazy filters
+  // operations de base
   filter(f) {
-    this.filters.push(f);
+    this.poss = this.poss.filter(f);
     return this;
   }
+  sort(f) {
+    this.poss.sort(f);
+    return this;
+  }
+  shuffle() {
+    for (var i = this.poss.length - 1; i > 0; i--) {
+      var j = Math.random() * (i-1);
+      var temp = this.poss[i];
+      this.poss[i] = this.poss[j];
+      this.poss[j] = temp;
+    }
+    return this;
+  }
+  // filtres
   alive() {
     return this.filter(e => e.alive);
   }
@@ -63,12 +64,7 @@ class FilterTargets {
     var s = this.self;
     return this.filter(e => Math2D.pixelDistance2(s, e) <= range**2);
   }
-  // sort nécessite de calculer le tableau
-  sort(f) {
-    this.evalFilters();
-    this.poss.sort(f);
-    return this;
-  }
+  // tris
   sortByDistance(ascending = true) {
     var s = this.self;
     if (ascending) { // plus proche en premier
@@ -82,17 +78,6 @@ class FilterTargets {
         Math2D.pixelDistance2(s, e2)
       - Math2D.pixelDistance2(s, e1)
       );
-    }
-    return this;
-  }
-  // shuffle nécessite de calculer le tableau
-  shuffle() {
-    this.evalFilters();
-    for (var i = this.poss.length - 1; i >= 0; i--) {
-      var j = Math.random * i;
-      var temp = this.poss[i];
-      this.poss[i] = this.poss[j];
-      this.poss[j] = temp;
     }
     return this;
   }
