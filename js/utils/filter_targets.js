@@ -18,9 +18,6 @@ class FilterTargets {
   clone() {
     return new FilterTargets(this.self, [this.poss]);
   }
-  split() {
-    return this.clone();
-  }
   static merge(...filterResults) {
     return new FilterTargets(this.self, filterResults);
   }
@@ -84,6 +81,21 @@ class FilterTargets {
       this.poss[j] = temp;
     }
     return this;
+  }
+  split(separator) {
+    this.evalFilters();
+    this.evalSorts();
+    var bagOfTruth = [];
+    var bagOfLies = [];
+    for (var i = 0; i < this.poss.length; i++) {
+      var theThing = this.poss[i];
+      if (separator(theThing) === true) // explicitement intentionnel
+        bagOfTruth.push(theThing);
+      else
+        bagOfLies.push(theThing);
+    }
+    this.poss = bagOfTruth;
+    return new FilterTargets(this.self, [bagOfLies]);
   }
   // filtres
   alive() {
