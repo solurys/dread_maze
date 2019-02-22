@@ -1,3 +1,7 @@
+FilterTargets permet de choisir rapidement selon une liste de critère une ou plusieurs cibles.  
+Elle prend pour paramètres une entité "soi-même", et un tableau de cibles.  
+Ce tableau peut contenir des entités, des groupes Phaser, ou des tableaux d'entités.
+
 Pour construire une requête avec filterTargets, il faut généralement spécifier dans l'ordre :
 - les filtres (réduit le nombre de possibilités)
 - les tris (donne un ordre)
