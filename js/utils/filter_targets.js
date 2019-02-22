@@ -1,3 +1,13 @@
+/*
+ * La classe FilterTargets permet de choisir rapidement selon une liste de
+ * critère une ou plusieurs cibles.
+ *
+ * Ici se trouve les opérations de base de la classe (filter, sort, ...).
+ *
+ * Pour les opérations plus spécifiques (nearby, sortByDistance, ...),
+ * voir filter_targets_helpers.js
+ */
+
 class FilterTargets {
   constructor(self, targets) {
     this.self = self;
@@ -96,55 +106,6 @@ class FilterTargets {
     }
     this.poss = bagOfTruth;
     return new FilterTargets(this.self, [bagOfLies]);
-  }
-  // filtres
-  alive() {
-    return this.filter(e => e.alive);
-  }
-  dead() {
-    return this.filter(e => !e.alive);
-  }
-  ofType(type) {
-    return this.filter(e => e instanceof type);
-  }
-  nearby(range) {
-    var s = this.self;
-    return this.filter(e => Math2D.pixelDistance2(s, e) <= range**2);
-  }
-  faraway(range) {
-    var s = this.self;
-    return this.filter(e => Math2D.pixelDistance2(s, e) >= range**2);
-  }
-  filterStats(f) {
-    return this.filter(e => f(e.stats));
-  }
-  compareStats(f) {
-    var self = this.self;
-    return this.filter(target => f(self.stats, target.stats));
-  }
-  // tris
-  sortByDistance(ascending = true) {
-    var s = this.self;
-    if (ascending) { // plus proche en premier
-      this.sort((e1, e2) =>
-        Math2D.pixelDistance2(s, e1)
-      - Math2D.pixelDistance2(s, e2)
-      );
-    }
-    else { // plus loin en premier
-      this.sort((e1, e2) =>
-        Math2D.pixelDistance2(s, e2)
-      - Math2D.pixelDistance2(s, e1)
-      );
-    }
-    return this;
-  }
-  sortByStat(stat, ascending = true) {
-    if (ascending)
-      this.sort((e1, e2) => e1.stats[stat] - e2.stats[stat]);
-    else
-      this.sort((e1, e2) => e2.stats[stat] - e1.stats[stat]);
-    return this;
   }
 }
 
