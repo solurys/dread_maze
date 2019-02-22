@@ -3,13 +3,16 @@ class Vector {
     this.x = x;
     this.y = y;
   }
-  static from(a, b) {
+  static from_to(a, b) {
     return new Vector(b.x-a.x, b.y-a.y);
   }
+  length() {
+    return Math.sqrt(this.x**2 + this.y**2);
+  }
   normalize() {
-    var dist = Math.sqrt(this.x**2 + this.y**2);
-    this.x /= dist;
-    this.y /= dist;
+    var length = this.length();
+    this.x /= length;
+    this.y /= length;
     return this;
   }
   multiply(n) {
