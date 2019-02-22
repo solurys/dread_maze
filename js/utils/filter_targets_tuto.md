@@ -10,11 +10,11 @@ var target =
  filterTargets(myEntity, [entityManager.adventurers])
   // filtres
   .alive() // en vie, pas mort
-  .nearby(200) // distant de 200px
+  .nearby(200) // distant de moins de 200px
   // tris
   .sortByDistance() // le plus proche devient le premier
   // accesseur
-  .first()
+  .first();
 ```
 
 Si aucune cible ne correspond, target aura la valeur *undefined*
@@ -32,7 +32,7 @@ var aventurierAleatoire =
  filterTargets(myEntity, [entityManager.adventurers])
   .alive()
   .shuffle()
-  .first()
+  .first();
 ```
 
 Si on spécifie plusieurs tris, il seront effectués par priorité.  
@@ -43,5 +43,5 @@ var target_array =
   .alive()
   .sortByStat('hp')
   .sortByDistance()
-  .toArray()
+  .toArray();
 ```
