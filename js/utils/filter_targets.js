@@ -111,6 +111,17 @@ class FilterTargets {
     var s = this.self;
     return this.filter(e => Math2D.pixelDistance2(s, e) <= range**2);
   }
+  faraway(range) {
+    var s = this.self;
+    return this.filter(e => Math2D.pixelDistance2(s, e) >= range**2);
+  }
+  filterStats(f) {
+    return this.filter(e => f(e.stats));
+  }
+  compareStats(f) {
+    var self = this.self;
+    return this.filter(target => f(self.stats, target.stats));
+  }
   // tris
   sortByDistance(ascending = true) {
     var s = this.self;
@@ -126,6 +137,13 @@ class FilterTargets {
       - Math2D.pixelDistance2(s, e1)
       );
     }
+    return this;
+  }
+  sortByStat(stat, ascending = true) {
+    if (ascending)
+      this.sort((e1, e2) => e1.stats[stat] - e2.stats[stat]);
+    else
+      this.sort((e1, e2) => e2.stats[stat] - e1.stats[stat]);
     return this;
   }
 }
