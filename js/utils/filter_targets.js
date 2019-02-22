@@ -17,7 +17,7 @@ class FilterTargets {
     for (var t of targets) {
       if      (t instanceof Phaser.Group)  this.poss.push(...t.children);
       else if (t instanceof Array)         this.poss.push(...t);
-      else if (t instanceof FilterTargets) this.poss.push(...t.poss);
+      else if (t instanceof FilterTargets) {t.evalPoss(); this.poss.push(...t.poss);}
       else                                 this.poss.push(t);
     }
     // enlever les duplications des targets et self
@@ -28,8 +28,9 @@ class FilterTargets {
   clone() {
     return new FilterTargets(this.self, [this.poss]);
   }
-  static merge(...filterResults) {
-    return new FilterTargets(this.self, filterResults);
+  evalPoss() {
+    this.evalFilters();
+    this.evalSorts();
   }
   evalFilters() {
     if (this.filters.length === 0) return;
@@ -52,23 +53,19 @@ class FilterTargets {
   }
   // accesseurs
   first() {
-    this.evalFilters();
-    this.evalSorts();
+    this.evalPoss();
     return this.poss[0];
   }
   last() {
-    this.evalFilters();
-    this.evalSorts();
+    this.evalPoss();
     return this.poss[this.poss.length - 1];
   }
   toArray() {
-    this.evalFilters();
-    this.evalSorts();
+    this.evalPoss();
     return this.poss;
   }
   forEach(f, thisArg) {
-    this.evalFilters();
-    this.evalSorts();
+    this.evalPoss();
     this.poss.forEach(f, thisArg);
     return this;
   }
@@ -93,8 +90,7 @@ class FilterTargets {
     return this;
   }
   split(separator) {
-    this.evalFilters();
-    this.evalSorts();
+    this.evalPoss();
     var bagOfTruth = [];
     var bagOfLies = [];
     for (var i = 0; i < this.poss.length; i++) {
