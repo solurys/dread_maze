@@ -19,4 +19,11 @@ class FollowEnemy extends IA {
       this.self.body.velocity.setTo(0, 0);
     }
   }
+  debug() {
+    this.self.game.debug.geom(
+      new Phaser.Circle(this.self.centerX, this.self.centerY, 400),
+      'blue',
+      /* filled = */ false
+    );
+  }
 }

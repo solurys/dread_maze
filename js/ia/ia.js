@@ -6,4 +6,5 @@ class IA {
     this.self = self;
   }
   update() {}
+  debug() {}
 }
