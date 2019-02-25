@@ -5,10 +5,10 @@
  * Ici se trouve les opérations de base de la classe (filter, sort, ...).
  *
  * Pour les opérations plus spécifiques (nearby, sortByDistance, ...),
- * voir filter_targets_helpers.js
+ * voir filter_targets.js
  */
 
-class FilterTargets {
+class FilterTargetsBase {
   constructor(self, targets) {
     this.self = self;
     this.poss = [];
@@ -107,8 +107,4 @@ class FilterTargets {
     this.poss = bagOfTruth;
     return new FilterTargets(this.self, [bagOfLies]);
   }
-}
-
-function filterTargets(self, targets) {
-  return new FilterTargets(self, targets);
 }
