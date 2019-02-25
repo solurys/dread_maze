@@ -9,6 +9,10 @@ function filterTargets(self, targets) {
 }
 
 class FilterTargets extends FilterTargetsBase {
+  constructor(self, targets) {
+    super(self, targets);
+  }
+
   // debug le résultat du filtre d'avant
   // par exemple : .debugFilter(e => console.log(e))
   debugFilter(f) {
