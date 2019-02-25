@@ -32,6 +32,7 @@ class FilterTargets {
   evalPoss() {
     this.evalFilters();
     this.evalSorts();
+    return this;
   }
   evalFilters() {
     if (this.filters.length === 0) return;
@@ -39,6 +40,7 @@ class FilterTargets {
       this.filters.every(f => f(e))
     );
     this.filters = [];
+    return this;
   }
   evalSorts() {
     if (this.sorts.length === 0) return;
@@ -51,6 +53,7 @@ class FilterTargets {
       return 0; // tous les tests == 0
     });
     this.sorts = [];
+    return this;
   }
   // accesseurs
   first() {
