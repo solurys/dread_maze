@@ -26,6 +26,7 @@ class FilterTargets {
     this.poss = [...set];
   }
   clone() {
+    this.evalPoss();
     return new FilterTargets(this.self, [this.poss]);
   }
   evalPoss() {
