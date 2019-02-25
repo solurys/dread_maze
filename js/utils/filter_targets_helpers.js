@@ -3,6 +3,12 @@
  * Les filtres et les tris vont ici.
  */
 
+// debug le résultat du filtre d'avant
+// par exemple : .debugFilter(e => console.log(e))
+FilterTargets.prototype.debugFilter = function(f) {
+    return this.filter(e => { f(e); return true; });
+}
+
 /************* les filtres *************/
 
 // ne garde que les cibles en vie.
