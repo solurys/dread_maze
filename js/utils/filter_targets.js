@@ -103,16 +103,6 @@ class FilterTargets {
     this.poss = bagOfTruth;
     return new FilterTargets(this.self, [bagOfLies]);
   }
-  split(branches) {
-    this.evalPoss();
-    var result = {};
-    for (var branch in branches) {
-      var ft = new FilterTargets(this.self, []);
-      ft.poss = this.poss.filter(branches[branch]);
-      result[branch] = ft;
-    }
-    return result;
-  }
 }
 
 function filterTargets(self, targets) {
