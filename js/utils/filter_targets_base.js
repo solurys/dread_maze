@@ -20,10 +20,13 @@ class FilterTargetsBase {
       else if (t instanceof FilterTargets) {t.evalPoss(); this.poss.push(...t.poss);}
       else                                 this.poss.push(t);
     }
-    // enlever les duplications des targets et self
+    this.filter(e => e !== self);
+  }
+  removeDuplicates() {
+    this.evalPoss();
     var set = new Set(this.poss);
-    set.delete(self);
     this.poss = [...set];
+    return this;
   }
   clone() {
     this.evalPoss();
@@ -85,8 +88,11 @@ class FilterTargetsBase {
   shuffle() {
     this.evalFilters();
     this.sorts = [];
-    for (var i = this.poss.length - 1; i > 0; i--) {
-      var j = Math.random() * (i-1);
+    // https://fr.wikipedia.org/wiki/Mélange_de_Fisher-Yates
+    // https://bost.ocks.org/mike/shuffle
+    for (var i = this.poss.length - 1; i >= 1; i--) {
+      var j = Phaser.Math.between(0, i); // aléa entre 0 et i
+      // échange entre i et j
       var temp = this.poss[i];
       this.poss[i] = this.poss[j];
       this.poss[j] = temp;
