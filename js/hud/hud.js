@@ -1,6 +1,9 @@
 class HUD {
     constructor(game) {
-        // Paramètre pour le nombre de pièges etc ?
+        // Demander un paramètre pour le nombre de type de pièges et de monstres
+        // Faire le HUD en fonction du nombre (ajout petit à petit) ou faire des HUD type
+        // Revoir le nom des variables
+        // Faire héritage pour piège et monstre
         this.sprite = game.add.sprite(0,0,'hud');
         this.piege = [];
         this.piege.push(new Action());
@@ -9,7 +12,7 @@ class HUD {
     static preload(game) {
         game.load.image('hud', 'sprites/HUD/hud.png');
 
-        // Charger les sorts ici ? - Test avec p . numéro du piège dans action
+        // Charger tous les sorts ici
         game.load.image('p1', 'sprites/HUD/Piege1.png');
         
     }

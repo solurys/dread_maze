@@ -14,6 +14,6 @@ class InitState extends Phaser.State {
     game.state.start('preparation', false);
 
     // Création de l'HUD
-    h = new HUD(game);
+    var h = new HUD(game);
   }
 }
