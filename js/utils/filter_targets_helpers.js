@@ -40,13 +40,27 @@ class FilterTargets extends FilterTargetsBase {
   // ne garde que les ennemis proches selon un cercle de rayon "range" pixels
   nearby(range) {
     var s = this.self;
-    return this.filter(e => Math2D.pixelDistance2(s, e) <= range**2);
+    return this.filter(e => {
+      // collision cercle-rectangle
+      var closestX = clamp(this.self.centerX, e.left, e.right);
+      var closestY = clamp(this.self.centerY, e.top, e.bottom);
+      var dx = this.self.centerX - closestX;
+      var dy = this.self.centerY - closestY;
+      return dx*dx + dy*dy <= range*range;
+    });
   }
 
   // ne garde que les ennemis plus loin qu'un cercle de rayon "range" pixels
   faraway(range) {
     var s = this.self;
-    return this.filter(e => Math2D.pixelDistance2(s, e) >= range**2);
+    return this.filter(e => {
+      // collision cercle-rectangle
+      var closestX = clamp(this.self.centerX, e.left, e.right);
+      var closestY = clamp(this.self.centerY, e.top, e.bottom);
+      var dx = this.self.centerX - closestX;
+      var dy = this.self.centerY - closestY;
+      return dx*dx + dy*dy >= range*range;
+    });
   }
 
   // permet de filtrer selon les stats de la cible (avec une fonction donnée)
