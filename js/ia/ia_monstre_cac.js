@@ -2,12 +2,12 @@
 
 class MonstreCac extends IA {
   // self : entité controllée par l'ia
-  constructor(self) {
+  constructor(self, speed = 100) {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
     this.destination = {x: this.self.x, y: this.self.x};
-    this.speed = 100;
+    this.speed = speed;
   }
   update() {
     var that = this;

@@ -15,7 +15,8 @@ class PreparationState extends Phaser.State {
      //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
 
       var orc1 = game.entityManager.add(new Orc(game, 300, 300));
-       orc1.ia = new  MonstreCac(orc1);//FollowEnemy(sw4, [game.entityManager.adventurers]);
+       orc1.ia = new  MonstreCac(orc1, 50); // vitesse 50
+       //FollowEnemy(sw4, [game.entityManager.adventurers]);
 
     game.state.start('fight', false);
   }
