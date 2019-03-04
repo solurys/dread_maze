@@ -20,13 +20,13 @@ class Actor extends Entity {
   walk(velocity) {
     this.body.velocity.setTo(velocity.x, velocity.y);
     if (velocity.y > velocity.x && velocity.y > -velocity.x){
-      this.animations.play('walk-up', undefined, true);
+      this.animations.play('walk-down', undefined, true);
     }
     else if (velocity.y > velocity.x && velocity.y < -velocity.x){
       this.animations.play('walk-left', undefined, true);
     }
     else if (velocity.y < velocity.x && velocity.y < -velocity.x){
-      this.animations.play('walk-down', undefined, true);
+      this.animations.play('walk-up', undefined, true);
     }
     else if (velocity.y < velocity.x && velocity.y > -velocity.x){
       this.animations.play('walk-right', undefined, true);
