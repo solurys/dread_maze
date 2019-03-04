@@ -11,8 +11,11 @@ class PreparationState extends Phaser.State {
     var sw3 = game.entityManager.add(new Swordsman(game, 100, 100));
     sw3.ia = new KeyboardZQSDControl(sw3);
 
-     var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
-      sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
+     // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
+     //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
+
+      var orc1 = game.entityManager.add(new Orc(game, 300, 300));
+       orc1.ia = new  MonstreCac(orc1);//FollowEnemy(sw4, [game.entityManager.adventurers]);
 
     game.state.start('fight', false);
   }

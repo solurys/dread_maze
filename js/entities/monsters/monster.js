@@ -3,6 +3,7 @@ class Monster extends Actor {
     super(game, config);
   }
   static preload(game) {
-    
+    Orc.preload(game);
+
   }
 }

@@ -28,7 +28,7 @@ class MonstreCac extends IA {
         }
         else {
           var vel = Vector.from_to(that.self, that.destination).normalize().multiply(that.speed);
-          that.self.body.velocity.setTo(vel.x, vel.y);
+          that.self.walk(vel);
         }
       }
 
@@ -52,7 +52,7 @@ class MonstreCac extends IA {
 
             else{
               var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
-              this.self.body.velocity.setTo(vel.x, vel.y);
+              this.self.walk(vel);
             }
       }
   }
