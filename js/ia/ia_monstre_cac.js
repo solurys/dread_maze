@@ -2,12 +2,14 @@
 
 class MonstreCac extends IA {
   // self : entité controllée par l'ia
-  constructor(self, speed = 100) {
+  constructor(self, speed = 100, range_attack = 50, range_detection = 200) {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
     this.destination = {x: this.self.x, y: this.self.x};
     this.speed = speed;
+    this.range_attack = range_attack;
+    this.range_detection = range_detection;
   }
   update() {
     var that = this;
@@ -15,7 +17,7 @@ class MonstreCac extends IA {
           return filterTargets(that.self, [that.self.game.entityManager.adventurers])
                   // filtres
                   .alive() // en vie, pas mort
-                  .nearby(200) // distant de moins de 200px
+                  .nearby(that.range_detection) // distant de moins de 200px
                   // tris
                   .sortByDistance() // le plus proche devient le premier
                   // accesseur
@@ -42,11 +44,11 @@ class MonstreCac extends IA {
                 this.etat = 2;
             break;
         case 2: //attaque
-            if (Math2D.pixelDistance2(this.self, this.target) < 200**2) {
+            if (Math2D.pixelDistance2(this.self, this.target) < this.range_attack**2) {
               this.self.attack(this.target);
             }
 
-            if (Math2D.pixelDistance2(this.self, this.target) > 200**2) {
+            if (Math2D.pixelDistance2(this.self, this.target) > this.range_detection**2) {
               this.etat = 1;
             }
 

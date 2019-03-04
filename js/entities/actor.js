@@ -34,5 +34,7 @@ class Actor extends Entity {
 
   }
   idle() {}
-  attack(entity) {}
+  attack(entity) {
+    console.log("attaque");
+  }
 }
