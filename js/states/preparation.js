@@ -3,11 +3,14 @@ class PreparationState extends Phaser.State {
     // temporaire
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
+    function ro() { // make room
+      return {}; // x et y rempli par setRooms()
+    }
     game.roomManager.setRooms(4, 3, [
-      [{}, null, null],
-      [{}, {}, {}],
-      [null, {}, null],
-      [null, {}, null]
+      [ro(), null, null],
+      [ro(), ro(), ro()],
+      [null, ro(), null],
+      [null, ro(), null]
     ]);
     game.roomManager.moveCameraTo(0, 0);
 

@@ -13,16 +13,16 @@ class RoomManager {
     return this.rooms[this.currentLine][this.currentCol];
   }
   handleInput(keys) {
-    if (keys.up.isDown) {
+    if (keys.up.justPressed()) {
       this.moveCamera('up');
     }
-    else if (keys.down.isDown) {
+    if (keys.down.justPressed()) {
       this.moveCamera('down');
     }
-    else if (keys.left.isDown) {
+    if (keys.left.justPressed()) {
       this.moveCamera('left');
     }
-    else if (keys.right.isDown) {
+    if (keys.right.justPressed()) {
       this.moveCamera('right');
     }
   }
@@ -48,6 +48,7 @@ class RoomManager {
          }
       }
     }
+    game.world.setBounds(0, 0, this.wr*nbLines, this.hr*nbCols);
   }
   isValidRoomCoord(line, col) {
     return line >= 0 && line < this.nbLines

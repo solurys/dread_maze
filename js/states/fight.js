@@ -3,7 +3,6 @@ class FightState extends Phaser.State {
     game.load.image('carte', 'sprites/carte.png');
   }
   create(game) {
-    game.world.setBounds(0, 0, 1600, 1200);
     this.cursors = game.input.keyboard.createCursorKeys();
     game.add.sprite(0, 0, 'carte');
   }
