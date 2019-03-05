@@ -1,6 +1,17 @@
 class FightState extends Phaser.State {
+  preload(game) {
+    game.load.image('carte', 'sprites/carte.png');
+  }
+  create(game) {
+    game.world.setBounds(0, 0, 1600, 1200);
+    this.cursors = game.input.keyboard.createCursorKeys();
+    game.add.sprite(0, 0, 'carte');
+  }
+
   update(game) {
     game.entityManager.update();
+    game.roomManager.handleInput(this.cursors);
+
   }
   render(game) {
     game.entityManager.adventurers.forEach(adv => {

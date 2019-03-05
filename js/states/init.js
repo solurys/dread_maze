@@ -4,8 +4,6 @@ class InitState extends Phaser.State {
     Entity.preload(game);
     HUD.preload(game);
     // l'entityManager gère la logique de jeu
-    
-    
     game.stage.backgroundColor = "#4488AA";
 
   }
@@ -13,6 +11,6 @@ class InitState extends Phaser.State {
     // passage à la préparation du dongeon
     game.state.start('menu', false);
 
-    
+
   }
 }

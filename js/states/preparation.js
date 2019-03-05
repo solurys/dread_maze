@@ -2,6 +2,14 @@ class PreparationState extends Phaser.State {
   create(game) {
     // temporaire
     game.entityManager = new EntityManager(game);
+    game.roomManager = new RoomManager(game);
+    game.roomManager.setRooms(4, 3, [
+      [{}, null, null],
+      [{}, {}, {}],
+      [null, {}, null],
+      [null, {}, null]
+    ]);
+    game.roomManager.moveCameraTo(0, 0);
 
     // var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
     // sw1.ia = new KeyboardArrowControl(sw1);
@@ -11,16 +19,16 @@ class PreparationState extends Phaser.State {
 
     var and = game.entityManager.add(new Andrax(game, 100, 100));
 
-     // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
-     //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
+    // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
+    //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
 
-      var orc1 = game.entityManager.add(new Orc(game, 300, 300));
+    var orc1 = game.entityManager.add(new Orc(game, 300, 300));
 
 
-       var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));
+    var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));
 
-       // Création de l'HUD
-       var h = new HUD(game);
+    // Création de l'HUD
+    var h = new HUD(game);
 
     game.state.start('fight', false);
   }
