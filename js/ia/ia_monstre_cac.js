@@ -45,7 +45,7 @@ class MonstreCac extends IA {
                 this.etat = 2;
             break;
         case 2: //attaque
-            if (Math2D.pixelDistance2(this.self, this.target) < this.range_attack**2) {
+            if (Math2D.pixelDistance2(this.self, this.target) <= this.range_attack**2) {
               this.self.attack(this.target);
             }
 
@@ -54,15 +54,8 @@ class MonstreCac extends IA {
             }
 
             else{
-              if (est_distance){
-                var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
-                this.self.walk(-vel);
-              }
-              else{
-                var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
-                this.self.walk(vel);
-              }
-
+              var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
+              this.self.walk(vel);
             }
       }
   }
