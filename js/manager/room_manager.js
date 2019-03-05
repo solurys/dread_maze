@@ -48,7 +48,7 @@ class RoomManager {
          }
       }
     }
-    game.world.setBounds(0, 0, this.wr*nbLines, this.hr*nbCols);
+    game.world.setBounds(0, 0, this.wr*nbCols, this.hr*nbLines);
   }
   isValidRoomCoord(line, col) {
     return line >= 0 && line < this.nbLines
@@ -59,7 +59,7 @@ class RoomManager {
     if (this.isValidRoomCoord(line, col)) {
       this.currentLine = line;
       this.currentCol = col;
-      this.game.camera.setPosition(this.wr*line, this.hr*col);
+      this.game.camera.setPosition(this.wr*col, this.hr*line);
       return true;
     }
     else {

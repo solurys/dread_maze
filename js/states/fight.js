@@ -4,7 +4,8 @@ class FightState extends Phaser.State {
   }
   create(game) {
     this.cursors = game.input.keyboard.createCursorKeys();
-    game.add.sprite(0, 0, 'carte');
+    var carte = game.add.sprite(0, 0, 'carte');
+    carte.sendToBack(); // carte en dessous de toute sprite
   }
 
   update(game) {
