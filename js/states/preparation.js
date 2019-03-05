@@ -1,5 +1,7 @@
 class PreparationState extends Phaser.State {
   create(game) {
+
+    game.entityManager = new EntityManager(game);
     // temporaire
 
     // var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
@@ -18,6 +20,9 @@ class PreparationState extends Phaser.State {
 
        var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));
         ske1.ia = new  MonstreCac(ske1, 30, 200, 220); // vitesse 50
+
+        // Création de l'HUD
+    var h = new HUD(game);
 
     game.state.start('fight', false);
   }
