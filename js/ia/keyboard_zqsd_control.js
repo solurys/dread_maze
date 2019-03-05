@@ -1,5 +1,5 @@
 class KeyboardZQSDControl extends UserControl {
-  constructor(self) {
+  constructor(self, speed = 200) {
     var key = keycode => self.game.input.keyboard.addKey(keycode);
     var k = Phaser.KeyCode;
     super(self, {
@@ -7,7 +7,7 @@ class KeyboardZQSDControl extends UserControl {
       down: key(k.S),
       left: key(k.Q),
       right: key(k.D),
-      speed: 600
+      speed: speed
     });
   }
 }

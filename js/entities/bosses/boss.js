@@ -3,6 +3,6 @@ class Boss extends Actor {
     super(game, config);
   }
   static preload(game) {
-    
+    Andrax.preload(game);
   }
 }

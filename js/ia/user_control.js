@@ -12,14 +12,13 @@ class UserControl extends IA {
 
   update() {
     var k = this.keys;
-    var vel_x = 0;
-    var vel_y = 0;
+    var vel = { x:0, y:0};
 
-    if (k.up.isDown)    vel_y -= this.speed;
-    if (k.down.isDown)  vel_y += this.speed;
-    if (k.left.isDown)  vel_x -= this.speed;
-    if (k.right.isDown) vel_x += this.speed;
+    if (k.up.isDown)    vel.y -= this.speed;
+    if (k.down.isDown)  vel.y += this.speed;
+    if (k.left.isDown)  vel.x -= this.speed;
+    if (k.right.isDown) vel.x += this.speed;
 
-    this.self.body.velocity.setTo(vel_x, vel_y);
+    this.self.walk(vel);
   }
 }

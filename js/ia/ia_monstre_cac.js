@@ -2,7 +2,7 @@
 
 class MonstreCac extends IA {
   // self : entité controllée par l'ia
-  constructor(self, speed = 100, range_attack = 50, range_detection = 200) {
+  constructor(self, speed = 100, range_attack = 50, range_detection = 200, est_dist = false) {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
@@ -10,6 +10,7 @@ class MonstreCac extends IA {
     this.speed = speed;
     this.range_attack = range_attack;
     this.range_detection = range_detection;
+    this.est_distance = est_dist;
   }
   update() {
     var that = this;
@@ -53,8 +54,15 @@ class MonstreCac extends IA {
             }
 
             else{
-              var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
-              this.self.walk(vel);
+              if (est_distance){
+                var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
+                this.self.walk(-vel);
+              }
+              else{
+                var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
+                this.self.walk(vel);
+              }
+
             }
       }
   }
