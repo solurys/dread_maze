@@ -37,6 +37,6 @@ class PreparationState extends Phaser.State {
     game.state.start('fight', false);
   }
   update(game) {
-    // le joueur mets en place le dungeon
+    // le joueur met en place le dungeon
   }
 }
