@@ -12,10 +12,7 @@ class PreparationState extends Phaser.State {
       [null, ro(), null],
       [null, ro(), null]
     ]);
-    /*game.roomManager.setRooms(2, 2, [
-      [ro(), ro()],
-      [ro(), ro()]
-    ]);*/
+
     game.roomManager.moveCameraTo(0, 0);
 
     // var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
