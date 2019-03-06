@@ -19,6 +19,7 @@ class Andrax extends Boss {
     this.animations.add('walk-right',[27,28,29,30,31,32,33,34,35],10);
 
     this.ia = new KeyboardZQSDControl(this);
+
   }
   static preload(game) {
     game.load.spritesheet('andrax', 'sprites/Boss/Andrax/andrax-walk.png',64,64);

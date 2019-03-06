@@ -19,6 +19,9 @@ class UserControl extends IA {
     if (k.left.isDown)  vel.x -= this.speed;
     if (k.right.isDown) vel.x += this.speed;
 
-    this.self.walk(vel);
+    if (vel.x != 0 || vel.y != 0)
+      this.self.walk(vel);
+    else
+      this.self.stop();
   }
 }
