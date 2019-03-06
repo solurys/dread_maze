@@ -48,4 +48,4 @@ import json
 
 print(json.dumps(atlas, sort_keys=True, indent=4))
 
-# python3 lpc-atlas.py > skeleton_atlas.json
+# python3 lpc-atlas-generator.py > skeleton_atlas.json
