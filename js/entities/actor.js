@@ -33,7 +33,10 @@ class Actor extends Entity {
     }
 
   }
-  idle() {}
+  stop() {
+    this.body.velocity.setTo(0,0);
+    this.animations.stop();
+  }
   attack(entity) {
     console.log("attaque");
   }

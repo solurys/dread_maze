@@ -6,11 +6,11 @@ class Orc extends Monster {
       sprite: 'orc',
       frame: 18,
       stats: {
-        hpMax: 6,
+        hpMax: 8,
         mpMax: 0,
-        strength: 3,
-        defense: 3,
-        dodgeRate: 0.1
+        strength: 10,
+        defense: 4,
+        dodgeRate: 0.3
       }
     });
     this.animations.add('walk-up',[0,1,2,3,4,5,6,7,8],10);
@@ -18,7 +18,7 @@ class Orc extends Monster {
     this.animations.add('walk-down',[18,19,20,21,22,23,24,25,26],10);
     this.animations.add('walk-right',[27,28,29,30,31,32,33,34,35],10);
 
-    this.ia = new MonstreCac(this, 70); 
+    this.ia = new MonstreCac(this, 70);
   }
   static preload(game) {
     game.load.spritesheet('orc', 'sprites/Monsters/Orc/orc_walk.png',64,64);
