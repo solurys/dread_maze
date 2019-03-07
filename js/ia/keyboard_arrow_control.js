@@ -7,6 +7,7 @@ class KeyboardArrowControl extends UserControl {
       down: key(k.DOWN),
       left: key(k.LEFT),
       right: key(k.RIGHT),
+      attack: key(k.SPACEBAR),
       speed: 600
     });
   }

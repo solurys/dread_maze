@@ -7,6 +7,7 @@ class KeyboardZQSDControl extends UserControl {
       down: key(k.S),
       left: key(k.Q),
       right: key(k.D),
+      attack: key(k.A),
       speed: speed
     });
   }

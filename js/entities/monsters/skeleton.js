@@ -19,7 +19,7 @@ class Skeleton extends Monster {
     // this.animations.add('walk-down',[18,19,20,21,22,23,24,25,26],10);
     // this.animations.add('walk-right',[27,28,29,30,31,32,33,34,35],10);
 
-    setup_lpc_animations(this);
+    LPC_Atlas.setup_basic_lpc_animations(this);
 
     this.ia = new  MonstreCac(this, 30, 200, 220, true); // vitesse 50
   }

@@ -5,7 +5,8 @@ class UserControl extends IA {
       up: config.up,
       down: config.down,
       left: config.left,
-      right: config.right
+      right: config.right,
+      attack: config.attack
     };
     this.speed = config.speed;
   }
@@ -21,6 +22,8 @@ class UserControl extends IA {
 
     if (vel.x != 0 || vel.y != 0)
       this.self.walk(vel);
+    else if (k.attack.justPressed())
+      this.self.attack();
     else
       this.self.stop();
   }
