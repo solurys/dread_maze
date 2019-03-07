@@ -19,10 +19,10 @@ class MenuState extends Phaser.State {
         // //popup info button
         // var text = this.add.text();
         // var popup = game.add.sprite(375, 300, 'popupInfo');
-        popup.alpha = 0.8;
-        popup.anchor.set(0.5);
-        popup.inputEnabled = true;
-        popup.input.enableDrag();
+        // popup.alpha = 0.8;
+        // popup.anchor.set(0.5);
+        // popup.inputEnabled = true;
+        // popup.input.enableDrag();
 
         var buttonExit = game.add.button(375, 400, 'buttonExit', this.openWindow, this);
         buttonExit.scale.x = 0.2;
