@@ -1,7 +1,8 @@
 class Actor extends Entity {
   constructor(game, config) {
     super(game, config);
-    this.ia = config.ia; // undefined possible
+    //this.ia = config.ia; // undefined possible
+    this.baseAttack = config.baseAttack;
     this.stats = {
       hpMax: config.stats.hpMax, // points de vie max
       mpMax: config.stats.mpMax, // points de magie
@@ -11,6 +12,7 @@ class Actor extends Entity {
     };
     this.stats.hp = this.stats.hpMax;
     this.stats.mp = this.stats.mpMax;
+    this.isAttacking = false;
   }
   update() {
     if (this.ia !== undefined)
@@ -18,20 +20,11 @@ class Actor extends Entity {
   }
   // attaques ? animations ? TODO
   walk(velocity) {
-    this.body.velocity.setTo(velocity.x, velocity.y);
-    if (velocity.y > velocity.x && velocity.y > -velocity.x){
-      this.animations.play('walk-down', undefined, true);
+    if (!this.isAttacking) {
+      this.body.velocity.setTo(velocity.x, velocity.y);
+      var direction = Math2D.guessDirection(velocity);
+      this.animations.play('walk-' + direction, undefined, true);
     }
-    else if (velocity.y > velocity.x && velocity.y < -velocity.x){
-      this.animations.play('walk-left', undefined, true);
-    }
-    else if (velocity.y < velocity.x && velocity.y < -velocity.x){
-      this.animations.play('walk-up', undefined, true);
-    }
-    else if (velocity.y < velocity.x && velocity.y > -velocity.x){
-      this.animations.play('walk-right', undefined, true);
-    }
-
   }
   stop() {
     this.body.velocity.setTo(0,0);
@@ -39,5 +32,10 @@ class Actor extends Entity {
   }
   attack(entity) {
     console.log("attaque");
+    var direction = Math2D.guessDirection(Vector.from_to(this, entity));
+    this.isAttacking = true;
+    var anim = this.animations.play(this.baseAttack + '-' + direction);
+    this.body.velocity.setTo(0, 0);
+    anim.onComplete.addOnce(() => {this.isAttacking = false}, this);
   }
 }

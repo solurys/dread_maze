@@ -5,6 +5,12 @@ class Math2D {
   static pixelDistance(a, b) {
     return Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
   }
+  static guessDirection(vector) {
+         if (vector.y >= vector.x && vector.y >= -vector.x) return 'down';
+    else if (vector.y >= vector.x && vector.y <= -vector.x) return 'left'
+    else if (vector.y <= vector.x && vector.y <= -vector.x) return 'up';
+    else if (vector.y <= vector.x && vector.y >= -vector.x) return 'right';
+  }
 }
 
 // limite n entre min et max
