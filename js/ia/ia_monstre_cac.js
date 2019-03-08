@@ -39,26 +39,35 @@ class MonstreCac extends IA {
           case 1: //patrouille
             //le personnage se déplace aléatoirement dans la piece
             mouvementAleatoire();
-            //si ennemie detecter etat attaque
+            //si ennemi detecté etat attaque
             this.target = detecterProche();
             if (this.target != undefined)
                 this.etat = 2;
             break;
         case 2: //attaque
+            // si la cible est à portée d'attaque
             if (Math2D.rangeCheck(this.self, this.target, this.range_attack)) {
               this.self.attack(this.target);
             }
 
-            if (Math2D.rangeCheck(this.self, this.target, this.range_detection)) {
+            // si la cible est hors de détection
+            else if (!Math2D.rangeCheck(this.self, this.target, this.range_detection)) {
               this.etat = 1;
             }
 
+            // n'est pas à portée d'attaque mais détecté
+            // on s'approche
             else{
               var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
               this.self.walk(vel);
             }
       }
   }
-  debug() {}
+  debug() {
+    var b = this.self.body;
+    var rd = this.range_detection;
+    var rec = new Phaser.Rectangle(b.x-rd/2, b.y-rd/2, b.width+rd, b.height+rd);
+    this.self.game.debug.rectangle(rec, 'red', false);
+  }
 
 }

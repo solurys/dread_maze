@@ -14,10 +14,12 @@ class FightState extends Phaser.State {
     game.cameraManager.updateFollow();
   }
   render(game) {
-    game.entityManager.adventurers.forEach(adv => {
-      if (adv.ia !== undefined)
-        adv.ia.debug();
-      game.debug.body(adv);
+    var db = (entity => {
+      if (entity.ia !== undefined)
+        entity.ia.debug();
+      game.debug.body(entity);
     });
+    game.entityManager.adventurers.forEach(db);
+    game.entityManager.monsters.forEach(db);
   }
 }
