@@ -20,10 +20,11 @@ class UserControl extends IA {
     if (k.left.isDown)  vel.x -= this.speed;
     if (k.right.isDown) vel.x += this.speed;
 
-    if (vel.x != 0 || vel.y != 0)
-      this.self.walk(vel);
-    else if (k.attack.justPressed())
+
+    if (k.attack.justPressed())
       this.self.attack();
+    else if (vel.x != 0 || vel.y != 0)
+      this.self.walk(vel);
     else
       this.self.stop();
   }

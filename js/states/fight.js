@@ -10,8 +10,8 @@ class FightState extends Phaser.State {
 
   update(game) {
     game.entityManager.update();
-    game.roomManager.handleInput(this.cursors);
-
+    game.cameraManager.handleInput(this.cursors);
+    game.cameraManager.updateFollow();
   }
   render(game) {
     game.entityManager.adventurers.forEach(adv => {

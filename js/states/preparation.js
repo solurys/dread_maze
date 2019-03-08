@@ -3,17 +3,15 @@ class PreparationState extends Phaser.State {
     // temporaire
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
-    function ro() { // make room
-      return {}; // x et y rempli par setRooms()
-    }
+    var room = 'room';
     game.roomManager.setRooms(4, 3, [
-      [ro(), null, null],
-      [ro(), ro(), ro()],
-      [null, ro(), null],
-      [null, ro(), null]
+      [room, null, null],
+      [room, room, room],
+      [null, room, null],
+      [null, room, null]
     ]);
 
-    game.roomManager.moveCameraTo(0, 0);
+    game.cameraManager = new CameraManager(game, 0, 0);
 
     // var sw1 = game.entityManager.add(new Swordsman(game, 0, 0));
     // sw1.ia = new KeyboardArrowControl(sw1);
@@ -22,6 +20,7 @@ class PreparationState extends Phaser.State {
     //sw2.ia = new KeyboardArrowControl(sw2);
 
     var and = game.entityManager.add(new Andrax(game, 100, 100));
+    game.cameraManager.follow(and);
 
     // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
     //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);

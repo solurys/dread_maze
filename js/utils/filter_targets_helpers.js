@@ -37,30 +37,30 @@ class FilterTargets extends FilterTargetsBase {
     return this.filter(e => e instanceof type);
   }
 
-  // ne garde que les ennemis proches selon un cercle de rayon "range" pixels
+  // ne garde que les cibles proches selon un cercle de rayon "range" pixels
   nearby(range) {
     var s = this.self;
-    return this.filter(e => {
-      // collision cercle-rectangle
-      var closestX = clamp(this.self.centerX, e.left, e.right);
-      var closestY = clamp(this.self.centerY, e.top, e.bottom);
-      var dx = this.self.centerX - closestX;
-      var dy = this.self.centerY - closestY;
-      return dx*dx + dy*dy <= range*range;
-    });
+    return this.filter(e =>
+      Math2D.rangeCheck(s, e, range)
+    );
   }
 
-  // ne garde que les ennemis plus loin qu'un cercle de rayon "range" pixels
+  // ne garde que les cibles plus loin qu'un cercle de rayon "range" pixels
   faraway(range) {
     var s = this.self;
-    return this.filter(e => {
-      // collision cercle-rectangle
-      var closestX = clamp(this.self.centerX, e.left, e.right);
-      var closestY = clamp(this.self.centerY, e.top, e.bottom);
-      var dx = this.self.centerX - closestX;
-      var dy = this.self.centerY - closestY;
-      return dx*dx + dy*dy >= range*range;
-    });
+    return this.filter(e =>
+      ! Math2D.rangeCheck(s, e, range)
+    );
+  }
+
+  // ne garde que les cibles dans la même salle
+  sameRoom() {
+    var s = this.self;
+    var rm = s.game.roomManager;
+    var myRoom = rm.getRoomOf(s);
+    return this.filter(e =>
+      myRoom.isInside(e)
+    );
   }
 
   // permet de filtrer selon les stats de la cible (avec une fonction donnée)

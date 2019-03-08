@@ -4,7 +4,6 @@ class Paladin extends Adventurer {
       x: x,
       y: y,
       sprite: 'paladin',
-      frame: 'walk-down-0',
       stats: {
         hpMax: 10,
         mpMax: 0,

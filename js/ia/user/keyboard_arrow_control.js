@@ -1,5 +1,5 @@
 class KeyboardArrowControl extends UserControl {
-  constructor(self) {
+  constructor(self, speed = 200) {
     var key = keycode => self.game.input.keyboard.addKey(keycode);
     var k = Phaser.KeyCode;
     super(self, {
@@ -8,7 +8,7 @@ class KeyboardArrowControl extends UserControl {
       left: key(k.LEFT),
       right: key(k.RIGHT),
       attack: key(k.SPACEBAR),
-      speed: 600
+      speed: speed
     });
   }
 }

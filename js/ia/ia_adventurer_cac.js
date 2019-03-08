@@ -45,11 +45,11 @@ class AdventurerCac extends IA {
                 this.etat = 2;
             break;
         case 2: //attaque
-            if (Math2D.pixelDistance2(this.self, this.target) <= this.range_attack**2) {
+            if (Math2D.rangeCheck(this.self, this.target, this.range_attack)) {
               this.self.attack(this.target);
             }
 
-            if (Math2D.pixelDistance2(this.self, this.target) > this.range_detection**2) {
+            if (Math2D.rangeCheck(this.self, this.target, this.range_detection)) {
               this.etat = 1;
             }
 

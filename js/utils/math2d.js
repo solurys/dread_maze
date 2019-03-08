@@ -11,6 +11,12 @@ class Math2D {
     else if (vector.y <= vector.x && vector.y <= -vector.x) return 'up';
     else if (vector.y <= vector.x && vector.y >= -vector.x) return 'right';
   }
+  static rangeCheck(self, other, range) {
+    return self.left - range <= other.right
+        && self.right + range >= other.left
+        && self.top - range <= other.bottom
+        && self.bottom + range >= other.top;
+  }
 }
 
 // limite n entre min et max

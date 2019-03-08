@@ -4,7 +4,6 @@ class Andrax extends Boss {
       x: x,
       y: y,
       sprite: 'andrax',
-      frame: 'walk-down-0',
       stats: {
         hpMax: 50,
         mpMax: 70,

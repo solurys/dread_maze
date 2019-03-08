@@ -4,7 +4,6 @@ class Skeleton extends Monster {
       x: x,
       y: y,
       sprite: 'skeleton',
-      frame: 'walk-down-0', //18,
       stats: {
         hpMax: 5,
         mpMax: 0,

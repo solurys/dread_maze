@@ -1,5 +1,10 @@
 class Actor extends Entity {
   constructor(game, config) {
+    // frame de départ par défaut
+    if (config.frame === undefined) {
+      config.frame = 'walk-down-0';
+    }
+
     super(game, config);
     //this.ia = config.ia; // undefined possible
     this.baseAttack = config.baseAttack;
@@ -12,6 +17,7 @@ class Actor extends Entity {
     };
     this.stats.hp = this.stats.hpMax;
     this.stats.mp = this.stats.mpMax;
+
     this.isAttacking = false;
     this.facingDirection = 'down';
   }
