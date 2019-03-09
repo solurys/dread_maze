@@ -20,7 +20,7 @@ class Skeleton extends Monster {
 
     LPC_Atlas.setup_basic_lpc_animations(this);
 
-    this.ia = new  MonstreCac(this, 30, 200, 220, true); // vitesse 50
+    this.ia = new  MonstreCac(this, 30, 130, 170, true);
   }
   static preload(game) {
     //game.load.spritesheet('skeleton', 'sprites/Monsters/Skeleton/skeleton_walk.png',64,64);

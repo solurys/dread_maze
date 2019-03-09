@@ -2,7 +2,7 @@
 
 class MonstreCac extends IA {
   // self : entité controllée par l'ia
-  constructor(self, speed = 100, range_attack = 50, range_detection = 200, est_dist = false) {
+  constructor(self, speed = 100, range_attack = 30, range_detection = 100, est_dist = false) {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
@@ -26,11 +26,12 @@ class MonstreCac extends IA {
       }
       function mouvementAleatoire() {
         var epsilon = 10;
-        if (Math.abs(that.destination.x - that.self.x) < epsilon && Math.abs(that.destination.y - that.self.y) < epsilon){
+        var pos = {x: that.self.centerX, y: that.self.centerY};
+        if (Math.abs(that.destination.x - pos.x) < epsilon && Math.abs(that.destination.y - pos.y) < epsilon){
           that.destination = {x: Phaser.Math.between(0,800), y: Phaser.Math.between(0,600)}; //limitation à la salle
         }
         else {
-          var vel = Vector.from_to(that.self, that.destination).normalize().multiply(that.speed);
+          var vel = Vector.from_to(pos, that.destination).normalize().multiply(that.speed);
           that.self.walk(vel);
         }
       }
@@ -61,13 +62,32 @@ class MonstreCac extends IA {
               var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
               this.self.walk(vel);
             }
+            break;
       }
   }
   debug() {
-    var b = this.self.body;
-    var rd = this.range_detection;
-    var rec = new Phaser.Rectangle(b.x-rd/2, b.y-rd/2, b.width+rd, b.height+rd);
-    this.self.game.debug.rectangle(rec, 'red', false);
-  }
+    var s = this.self;
 
+    var rd = this.range_detection;
+    var ra = this.range_attack;
+
+    var rec_rd = new Phaser.Rectangle(s.x-rd, s.y-rd, s.width+rd*2, s.height+rd*2);
+    var rec_ra = new Phaser.Rectangle(s.x-ra, s.y-ra, s.width+ra*2, s.height+ra*2);
+
+    var dg = this.self.game.debug;
+    dg.rectangle(rec_rd, 'yellow', false);
+    dg.rectangle(rec_ra, 'red', false);
+    switch(this.etat) {
+      case 1:
+        var dest = this.destination;
+        var line_dest = new Phaser.Line(s.centerX, s.centerY, dest.x, dest.y);
+        dg.geom(line_dest, 'black');
+        break;
+      case 2:
+        var t = this.target;
+        var line_target = new Phaser.Line(s.centerX, s.centerY, t.centerX, t.centerY);
+        dg.geom(line_target, 'red');
+        break;
+    }
+  }
 }
