@@ -62,7 +62,7 @@ class Actor extends Entity {
       }, this);
     }
 
-    console.log("attaque");
+    //console.log("attaque");
     return true;
   }
 }
