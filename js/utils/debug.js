@@ -16,22 +16,26 @@ window.gameDebug = window.gdb = {
   gr: function() {
     if (game.entityManager === undefined)
       throw 'game.entityManager === undefined';
-    else {
-      return {
-        adv: game.entityManager.adventurers.children,
-        mons: game.entityManager.monsters.children,
-        boss: game.entityManager.bosses.children,
-        proj: game.entityManager.projectiles.children,
-        trap: game.entityManager.traps.children,
-        phaser: {
-          adv: game.entityManager.adventurers,
-          mons: game.entityManager.monsters,
-          boss: game.entityManager.bosses,
-          proj: game.entityManager.projectiles,
-          trap: game.entityManager.traps
-        }
-      };
-    }
+    else return {
+      adv: game.entityManager.adventurers.children,
+      mons: game.entityManager.monsters.children,
+      boss: game.entityManager.bosses.children,
+      proj: game.entityManager.projectiles.children,
+      trap: game.entityManager.traps.children,
+    };
+  },
+
+  // les groupes phaser d'entités
+  pgr: function() {
+    if (game.entityManager === undefined)
+      throw 'game.entityManager === undefined';
+    else return {
+      adv: game.entityManager.adventurers,
+      mons: game.entityManager.monsters,
+      boss: game.entityManager.bosses,
+      proj: game.entityManager.projectiles,
+      trap: game.entityManager.traps
+    };
   },
 
   // les managers
@@ -46,7 +50,7 @@ window.gameDebug = window.gdb = {
     // récuperer l'entité clickée
     var pos = pointer.position;
     var zone = new Phaser.Rectangle(pos.x, pos.y, 1, 1);
-    var groups = Object.values(this.gr().phaser);
+    var groups = Object.values(this.pgr());
     var target = filterTargets(zone, groups).nearby(20).sortByDistance().first();
     // récupérer l'action à faire
     var select = document.getElementById("click-debug");
@@ -79,7 +83,7 @@ window.gameDebug = window.gdb = {
   },
 
   reviveAll: function() {
-    var groups = Object.values(this.gr().phaser);
+    var groups = Object.values(this.pgr());
     for (var gr of groups) {
       gr.reviveAll();
     }
@@ -91,7 +95,7 @@ window.gameDebug = window.gdb = {
 
   // rendu du debug sur le jeu (appellé dans renderer() des states)
   draw: function() {
-    var groups = Object.values(this.gr().phaser);
+    var groups = Object.values(this.pgr());
     for (var gr of groups) {
       gr.forEach(entity => {
         if (entity.debugEnabled) {
