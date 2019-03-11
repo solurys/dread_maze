@@ -1,4 +1,5 @@
 window.gameDebug = window.gdb = {
+  // options de dessin de debug draw()
   ia: false,
   body: false,
 
@@ -9,7 +10,7 @@ window.gameDebug = window.gdb = {
     bosses: 'rgba(0, 255, 0, 0.2)',
     projectiles: 'rgba(0, 0, 255, 0.2)',
     traps: 'rgba(0, 0, 0, 0.2)',
-    filled: true
+    filled: true // rectangle plein (filled) ou tracé (stroke)
   },
 
   // les groupes d'entités
@@ -56,15 +57,17 @@ window.gameDebug = window.gdb = {
     var select = document.getElementById("click-debug");
     var action = select.options[select.selectedIndex].getAttribute("name");
     // faire l'action
-    switch(action) {
+    switch (action) {
       case 'no-op': break;
       case 'console': console.log('click :', this.findEntityMessage(target), target); break;
-      case 'kill': target.kill(); console.log('killer click :', this.findEntityMessage(target), target); break;
+      case 'kill': if (target) target.kill(); console.log('killer click :', this.findEntityMessage(target), target); break;
     }
   },
 
   // petit message pour savoir où se trouve l'entité dans les groupes
   findEntityMessage: function(entity) {
+    if ((entity instanceof Entity) === false) return '???';
+
     var group = '';
 
     if (entity instanceof Adventurer) group = 'adv';
