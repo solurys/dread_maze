@@ -79,7 +79,7 @@ window.gameDebug = window.gdb = {
     var index = g.indexOf(entity);
     if (index === -1) return '(not in entityManager)';
 
-    return 'gdb.gr().'+group+'['+index+'] === ';
+    return 'gdb.gr().'+group+'['+index+']';
   },
 
   reviveAll: function() {
