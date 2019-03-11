@@ -59,8 +59,20 @@ window.gameDebug = window.gdb = {
     // faire l'action
     switch (action) {
       case 'no-op': break;
-      case 'console': console.log('click :', this.findEntityMessage(target), target); break;
-      case 'kill': if (target) target.kill(); console.log('killer click :', this.findEntityMessage(target), target); break;
+      case 'console':
+        console.log('click :', this.findEntityMessage(target), target);
+        break;
+      case 'kill':
+        if (target)
+          target.kill();
+        console.log('killer click :', this.findEntityMessage(target), target);
+        break;
+      case 'debug disable/enable':
+        if (target) {
+          target.debugEnabled = !target.debugEnabled;
+          console.log('debug : '+target.debugEnabled);
+        }
+        break;
     }
   },
 
