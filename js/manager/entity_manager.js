@@ -15,7 +15,6 @@ class EntityManager {
     else if (entity instanceof Trap)       this.traps.add(entity);
     else if (entity instanceof Boss)       this.bosses.add(entity);
     else if (entity instanceof Projectile) this.projectiles.add(entity);
-    entity.body.syncBounds = true;
     return entity;
   }
   update() {

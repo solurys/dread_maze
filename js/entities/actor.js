@@ -6,7 +6,7 @@ class Actor extends Entity {
     }
 
     super(game, config);
-    //this.ia = config.ia; // undefined possible
+    //this.ia = config.ia; // impossible : ia prend en paramètre this
     this.baseAttack = config.baseAttack;
     this.stats = {
       hpMax: config.stats.hpMax, // points de vie max
@@ -20,6 +20,13 @@ class Actor extends Entity {
 
     this.isAttacking = false;
     this.facingDirection = 'down';
+
+     // animations centrées
+    this.anchor.setTo(0.5, 0.5);
+    // boite de collision pour la majorité des perso en 64x64
+    // ne marche pas en 128x128
+    game.physics.arcade.enable(this);
+    this.body.setSize(35, 55, 15, 10);
   }
   update() {
     if (this.ia !== undefined)
@@ -38,8 +45,9 @@ class Actor extends Entity {
   stop() {
     this.body.velocity.setTo(0,0);
     if (!this.isAttacking) {
+      // personnage debout : 1ère frame de marche
       this.animations.play('walk-'+this.facingDirection);
-      this.animations.stop();
+      this.animations.stop(undefined, true);
     }
   }
   attack(entity) {
