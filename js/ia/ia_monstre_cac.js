@@ -46,6 +46,10 @@ class MonstreCac extends IA {
                 this.etat = 2;
             break;
         case 2: //attaque
+            // si la cible est morte
+            if (this.target.alive === false) {
+              this.etat = 1;
+            }
             // si la cible est à portée d'attaque
             if (Math2D.rangeCheck(this.self, this.target, this.range_attack)) {
               this.self.attack(this.target);

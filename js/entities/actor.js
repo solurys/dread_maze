@@ -29,7 +29,7 @@ class Actor extends Entity {
     this.body.setSize(35, 55, 15, 10);
   }
   update() {
-    if (this.ia !== undefined)
+    if (this.ia !== undefined && this.alive)
       this.ia.update();
   }
   // attaques ? animations ? TODO

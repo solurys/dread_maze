@@ -60,10 +60,18 @@
   <!-- main -->
   <script src="js/main.js"></script>
 
-  <!-- debug buttons -->
-  <button onclick="gameDebug.ia = !gameDebug.ia;">debug ia</button>
-  <button onclick="gameDebug.body = !gameDebug.body;">debug body</button>
+  <!-- debug menu -->
   <button onclick="game.enableStep(); game.step()">step by step</button>
   <button onclick="game.disableStep();">continue</button>
+  <span>debug :</span>
+  <button onclick="gameDebug.ia = !gameDebug.ia;">debug ia</button>
+  <button onclick="gameDebug.body = !gameDebug.body;">debug body</button>
+  <span>on click :</span>
+  <select id="click-debug">
+    <option name="no-op">do nothing</option>
+    <option name="console">console</option>
+    <option name="kill">kill</option>
+  </select>
+  <button onclick="gameDebug.reviveAll();">revive all</button>
 </body>
 </html>

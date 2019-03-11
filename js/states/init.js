@@ -3,7 +3,7 @@ class InitState extends Phaser.State {
     // preload des classes
     Entity.preload(game);
     HUD.preload(game);
-    // l'entityManager gère la logique de jeu
+
     game.stage.backgroundColor = "#4488AA";
 
   }

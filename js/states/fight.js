@@ -1,5 +1,8 @@
 class FightState extends Phaser.State {
   preload(game) {
+    // initialisation des outils de debug
+    gameDebug.init();
+    
     game.load.image('carte', 'sprites/Carte/Level1/level1B.png');
   }
   create(game) {
