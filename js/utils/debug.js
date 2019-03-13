@@ -49,7 +49,10 @@ window.gameDebug = window.gdb = {
   // click de souris qui est controllé par le <select> sur la page
   onClick: function(pointer) {
     // récuperer l'entité clickée
-    var pos = pointer.position;
+    var pos = {
+      x: pointer.position.x + game.camera.position.x,
+      y: pointer.position.y + game.camera.position.y
+    };
     var zone = new Phaser.Rectangle(pos.x, pos.y, 1, 1);
     var groups = Object.values(this.pgr());
     var target = filterTargets(zone, groups).nearby(20).sortByDistance().first();
