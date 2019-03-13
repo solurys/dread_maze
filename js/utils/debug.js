@@ -54,7 +54,7 @@ window.gameDebug = window.gdb = {
       y: pointer.position.y + game.camera.position.y
     };
     var zone = new Phaser.Rectangle(pos.x, pos.y, 1, 1);
-    var groups = Object.values(this.pgr());
+    var groups = this.values(this.pgr());
     var target = filterTargets(zone, groups).nearby(20).sortByDistance().first();
     // récupérer l'action à faire
     var select = document.getElementById("click-debug");
@@ -101,7 +101,7 @@ window.gameDebug = window.gdb = {
   },
 
   reviveAll: function() {
-    var groups = Object.values(this.pgr());
+    var groups = this.values(this.pgr());
     for (var gr of groups) {
       gr.reviveAll();
     }
@@ -113,7 +113,7 @@ window.gameDebug = window.gdb = {
 
   // rendu du debug sur le jeu (appellé dans renderer() des states)
   draw: function() {
-    var groups = Object.values(this.pgr());
+    var groups = this.values(this.pgr());
     for (var gr of groups) {
       gr.forEach(entity => {
         if (entity.debugEnabled) {
@@ -162,6 +162,11 @@ window.gameDebug = window.gdb = {
         return value = newValue;
       }
     });
+  },
+
+  // un remplacement pour Object.values(obj)
+  values: function(obj) {
+    return Object.keys(obj).map(k => obj[k]);
   }
 
 }
