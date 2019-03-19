@@ -26,11 +26,13 @@ class PreparationState extends Phaser.State {
     // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
     //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
 
-    var orc1 = game.entityManager.add(new Orc(game, 300, 300));
+    // Mise en commentaire car création via bouton IG
+    /*var orc1 = game.entityManager.add(new Orc(game, 300, 300));*/
+
     var pal1 = game.entityManager.add(new Paladin(game, 666 , 600));
 
-
-    var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));
+    // Mise en commentaire car création via bouton IG
+	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
 
     // Création de l'HUD
     var h = new HUD(game);
