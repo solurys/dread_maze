@@ -1,5 +1,6 @@
 class PreparationState extends Phaser.State {
   create(game) {
+
     // temporaire
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
