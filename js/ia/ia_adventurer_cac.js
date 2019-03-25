@@ -77,8 +77,6 @@ class AdventurerCac extends IA {
 
     var rec_rd = new Phaser.Rectangle(s.left, s.top, s.width, s.height);
     rec_rd.inflate(rd, rd);
-    //var rec_rd = new Phaser.Rectangle(s.left-rd, s.top-rd, s.width+rd*2, s.height+rd*2);
-    //var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
     var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
     rec_ra.inflate(ra,ra);
 
