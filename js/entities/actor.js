@@ -15,6 +15,9 @@ class Actor extends Entity {
       defense: config.stats.defense, // défense
       dodgeRate: config.stats.dodgeRate // taux d'esquive
     };
+    this.health = this.stats.hpMax;
+    this.maxHealth = this.stats.hpMax;
+
     this.stats.hp = this.stats.hpMax;
     this.stats.mp = this.stats.mpMax;
 
@@ -54,6 +57,10 @@ class Actor extends Entity {
     if (this.isAttacking)
       return false;
 
+    if(Math.random() > entity.stats.dodgeRate){
+        entity.damage(Math.abs(this.stats.strength - entity.stats.defense));
+        console.log(Math.abs(this.stats.strength - entity.stats.defense));
+    }
     // animation
     var direction = this.facingDirection; // par defaut
     if (entity !== undefined)

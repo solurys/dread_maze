@@ -9,7 +9,7 @@ class Paladin extends Adventurer {
         mpMax: 0,
         strength: 4,
         defense: 8,
-        dodgeRate: 0.05
+        dodgeRate: 0.1
       },
       baseAttack: 'slash'
     });
