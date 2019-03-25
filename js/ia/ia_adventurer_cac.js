@@ -15,7 +15,7 @@ class AdventurerCac extends IA {
   update() {
     var that = this;
       function detecterProche () {
-          return filterTargets(that.self, [that.self.game.entityManager.monsters])
+          return filterTargets(that.self, [that.self.game.entityManager.monsters,that.self.game.entityManager.bosses])
                   // filtres
                   .alive() // en vie, pas mort
                   .nearby(that.range_detection) // distant de moins de 200px
