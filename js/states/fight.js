@@ -10,11 +10,13 @@ class FightState extends Phaser.State {
     var carte = game.add.sprite(0, 0, 'carte');
     carte.sendToBack(); // carte en dessous de toute sprite
 
+    // Timer
     this.eventTimer = game.time.events.loop(2000, this.vague, this);
     this.text = game.add.text(300,50, "");
   }
 
- vague(){
+  // Méthode pour spawn les aventuriers
+  spawnVague(){
     var nbSpawn = Math.random() * 5;
     for(var i = 0; i < nbSpawn; i++){
       game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
