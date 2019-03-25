@@ -75,8 +75,12 @@ class AdventurerCac extends IA {
     var rd = this.range_detection;
     var ra = this.range_attack;
 
-    var rec_rd = new Phaser.Rectangle(s.x-rd, s.y-rd, s.width+rd*2, s.height+rd*2);
-    var rec_ra = new Phaser.Rectangle(s.x-ra, s.y-ra, s.width+ra*2, s.height+ra*2);
+    var rec_rd = new Phaser.Rectangle(s.left, s.top, s.width, s.height);
+    rec_rd.inflate(rd, rd);
+    //var rec_rd = new Phaser.Rectangle(s.left-rd, s.top-rd, s.width+rd*2, s.height+rd*2);
+    //var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
+    var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
+    rec_ra.inflate(ra,ra);
 
     var dg = this.self.game.debug;
     dg.rectangle(rec_rd, 'yellow', false);

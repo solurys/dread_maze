@@ -66,14 +66,14 @@ class FilterTargets extends FilterTargetsBase {
   // permet de filtrer selon les stats de la cible (avec une fonction donnée)
   // par exemple : .filterStats(target => target.hp < 10)
   filterStats(f) {
-    return this.filter(e => f(e.stats));
+    return this.filter(e => f(e));
   }
 
   // permet de comparer les stats de la cible et de soi-même (avec une fonction donnée)
   // par exemple : .compareStats( (self,target) => self.hp > target.hp )
   compareStats(f) {
     var self = this.self;
-    return this.filter(target => f(self.stats, target.stats));
+    return this.filter(target => f(self, target));
   }
 
 
@@ -103,9 +103,12 @@ class FilterTargets extends FilterTargetsBase {
   // par exemple : .sortByStat('hp')
   sortByStat(stat, ascending = true) {
     if (ascending)
-      this.sort((e1, e2) => e1.stats[stat] - e2.stats[stat]);
+      this.sort((e1, e2) => e1[stat] - e2[stat]);
     else
-      this.sort((e1, e2) => e2.stats[stat] - e1.stats[stat]);
+      this.sort((e1, e2) => e2[stat] - e1[stat]);
     return this;
   }
+
+
+
 }

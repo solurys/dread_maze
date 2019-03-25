@@ -8,18 +8,13 @@ class Actor extends Entity {
     super(game, config);
     //this.ia = config.ia; // impossible : ia prend en paramètre this
     this.baseAttack = config.baseAttack;
-    this.stats = {
-      hpMax: config.stats.hpMax, // points de vie max
-      mpMax: config.stats.mpMax, // points de magie
-      strength: config.stats.strength, // force
-      defense: config.stats.defense, // défense
-      dodgeRate: config.stats.dodgeRate // taux d'esquive
-    };
-    this.health = this.stats.hpMax;
-    this.maxHealth = this.stats.hpMax;
-
-    this.stats.hp = this.stats.hpMax;
-    this.stats.mp = this.stats.mpMax;
+    this.health = config.stats.hpMax; // vie courante
+    this.maxHealth = config.stats.hpMax; // vie maximum
+    this.mp = config.stats.mpMax; // points de magie courant
+    this.mpMax = config.stats.mpMax; // points de magie maximum
+    this.strength = config.stats.strength; // force d'attaque
+    this.defense = config.stats.defense; // défense
+    this.dodgeRate = config.stats.dodgeRate; // taux d'esquive
 
     this.isAttacking = false;
     this.facingDirection = 'down';
@@ -56,10 +51,10 @@ class Actor extends Entity {
   attack(entity) {
     if (this.isAttacking)
       return false;
-
-    if(Math.random() > entity.stats.dodgeRate){
-        entity.damage(Math.abs(this.stats.strength - entity.stats.defense));
-        console.log(Math.abs(this.stats.strength - entity.stats.defense));
+    
+    if(entity !== undefined && Math.random() > entity.dodgeRate){
+        entity.damage(Math.abs(this.strength - entity.defense));
+        console.log(Math.abs(this.strength - entity.defense));
     }
     // animation
     var direction = this.facingDirection; // par defaut
