@@ -15,7 +15,10 @@ class FightState extends Phaser.State {
   }
 
  vague(){
-    game.entityManager.add(new Paladin(game, 0, 0));
+    var nbSpawn = Math.random() * 5;
+    for(var i = 0; i < nbSpawn; i++){
+      game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
+    } 
 }
 
   update(game) {
