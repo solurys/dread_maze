@@ -11,7 +11,7 @@ class FightState extends Phaser.State {
     carte.sendToBack(); // carte en dessous de toute sprite
 
     // Timer
-    this.eventTimer = game.time.events.loop(2000, this.vague, this);
+    this.eventTimer = game.time.events.loop(2000, this.spawnVague, this);
     this.text = game.add.text(300,50, "");
   }
 
