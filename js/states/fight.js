@@ -9,7 +9,14 @@ class FightState extends Phaser.State {
     this.cursors = game.input.keyboard.createCursorKeys();
     var carte = game.add.sprite(0, 0, 'carte');
     carte.sendToBack(); // carte en dessous de toute sprite
+
+    game.time.events.loop(2000, this.vague, this);
+
   }
+
+ vague(){
+    game.entityManager.add(new Paladin(game, 0, 0));
+}
 
   update(game) {
     game.entityManager.update();
@@ -20,3 +27,5 @@ class FightState extends Phaser.State {
     gameDebug.draw();
   }
 }
+
+
