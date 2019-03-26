@@ -1,6 +1,9 @@
 class PreparationState extends Phaser.State {
   create(game) {
 
+    // Création de l'HUD
+    var h = new HUD(game);
+
     // temporaire
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
@@ -34,8 +37,7 @@ class PreparationState extends Phaser.State {
     // Mise en commentaire car création via bouton IG
 	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
 
-    // Création de l'HUD
-    var h = new HUD(game);
+
 
     game.state.start('fight', false);
   }
