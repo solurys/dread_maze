@@ -10,21 +10,35 @@ class MenuState extends Phaser.State {
 
     create(game) {
 
-      var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eleifend massa nec varius dapibus. Vestibulum augue enim, vulputate dignissim interdum ut, vulputate quis velit. Nunc augue lorem, semper sed faucibus cursus, lobortis ac leo. Nullam congue tristique sodales. Vivamus at interdum nulla, sit amet tincidunt sapien. Curabitur in tristique dolor. Phasellus at diam gravida, porta est non, pharetra nunc. Duis condimentum commodo tortor vitae eleifend. Curabitur libero ante, volutpat.";
+      var canvas = game.world.game.canvas;
+      canvas.style.position = "fixed";
+      canvas.style.left = (document.body.clientWidth / 2)-400;
 
-      var style = {
-        font: "bold 80px Arial",
+      var propos = "Projet de 4ème Semestre \n \n"+
+                    "Ce jeu a été réalisé dans le cadre du projet de 4ème semestre de l'année 2019 par : \n \n"+
+                    "CARBONERO Jack, DESFOURNEAUX Victor, FRANCEZ Gabriel, HANZ Anaël et LAPORTE Maëlle \n\n" +
+                    "Merci à Monsieur BLANCHARD d'avoir supervisé ce projet \n\n" +
+                    "© Dread Maze I - 2019";
+
+      var stylePop = {
+        font: "bold 78px flipps",
         fill: "black",
         wordWrap: true,
         wordWrapWidth: 3200,
         align: "center"
       };
 
+      //à centrer
+      var styleTitle = {
+        font: "bold 65px flipps",
+        fill: "#2c3e50"
+      };
+
         var buttonPlay = game.add.button(game.world.centerX-61.7, game.world.centerY-100, 'buttonPlay', launchPreparation, this);
         buttonPlay.scale.x = 0.2;
         buttonPlay.scale.y = 0.2;
 
-        var buttonExit = game.add.button(game.world.centerX-61.7, game.world.centerY, 'buttonExit',  openPopup , this);
+        var buttonExit = game.add.button(game.world.centerX-61.7, game.world.centerY, 'buttonExit',  closeGame , this);
         buttonExit.scale.x = 0.2;
         buttonExit.scale.y = 0.2;
 
@@ -42,18 +56,19 @@ class MenuState extends Phaser.State {
         popup.kill();
 
         var widthPop = popup.width + 800;
-        var heightPop = popup.height + 200;
+        var heightPop = popup.height + 650;
 
         var closeButton = game.make.sprite(widthPop, -heightPop, 'buttonClose');
         closeButton.inputEnabled = true;
         closeButton.input.priorityID = 1;
         closeButton.events.onInputDown.add(closePopup, this);
 
-        var text = game.add.text(-1700, -300, lorem, style);
+        var textPop = game.add.text(-1500, -1000, propos, stylePop);
 
-        popup.addChild(text);
+        popup.addChild(textPop);
         popup.addChild(closeButton);
 
+        var textTitle = game.add.text(0, 0, "Dread Maze I", styleTitle);
     }
 
 }
@@ -64,12 +79,16 @@ function launchPreparation(){
 
 function openPopup(){
   game.world.children[3].revive();
+  game.world.children[4].kill();
 }
 
 function closePopup(){
   game.world.children[3].kill();
+  game.world.children[4].revive();
 }
 
-// function closeGame(){
-//   window.close();
-// }
+function closeGame(){
+  if (confirm("Fermeture de la fenetre?")){
+    window.location.replace("http://google.com");
+  }
+}
