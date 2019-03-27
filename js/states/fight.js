@@ -13,10 +13,15 @@ class FightState extends Phaser.State {
 
   // Méthode pour spawn les aventuriers
   spawnVague(){
+    
+  	// Random pour le nombre d'aventuriers à spawn
     var nbSpawn = Math.random() * 5;
+
+    // Boucle qui crée les nbSpawn aventuriers
     for(var i = 0; i < nbSpawn; i++){
+
+      // Random pour la classe de l'aventurier à spawn (0 : Paladin // 1 : Healer)
       var numAdventurer = Number.parseInt(Math.random() * 2);
-      console.log(numAdventurer);
       switch (numAdventurer){
         case 0: 
             game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
