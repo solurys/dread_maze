@@ -11,14 +11,15 @@ class FightState extends Phaser.State {
     carte.sendToBack(); // carte en dessous de toute sprite
 
     // Timer
-    this.eventTimer = game.time.events.loop(Phaser.Timer.MINUTE * 3, this.spawnVague, this);
-    this.text = game.add.text(300,50, "");
+    this.eventTimer = game.time.events.loop(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND*5, this.spawnVague, this);
+    this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#000000"});
   }
 
   // Méthode pour spawn les aventuriers
   spawnVague(){
     var nbSpawn = Math.random() * 5;
     for(var i = 0; i < nbSpawn; i++){
+      //var numSpawn = Math.random() * ;
       game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
     }
 }
@@ -44,6 +45,16 @@ class FightState extends Phaser.State {
         texte +="0"
     }
     texte += secondes
+
+    // Si compteur inférieur à 1 minute et que les secondes sont pairs
+    if(minutes == 0 && secondes%2 == 0){
+    	this.text.setStyle({ fill: "#ffffff", backgroundColor: "#000000"});
+    }
+    // Si compteur inférieur à 1 minute et que les secondes sont impairs
+    else if(minutes == 0 && secondes%2 != 0){
+    	this.text.setStyle({ fill: "#ff0000", backgroundColor: "#000000"});
+    }
+
     this.text.setText(texte);
 
   }
