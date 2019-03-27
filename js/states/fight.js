@@ -11,7 +11,7 @@ class FightState extends Phaser.State {
     carte.sendToBack(); // carte en dessous de toute sprite
 
     // Timer
-    this.eventTimer = game.time.events.loop(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND*5, this.spawnVague, this);
+    this.eventTimer = game.time.events.loop(/*Phaser.Timer.MINUTE * 1*/ + Phaser.Timer.SECOND*5, this.spawnVague, this);
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#000000"});
   }
 
@@ -19,8 +19,16 @@ class FightState extends Phaser.State {
   spawnVague(){
     var nbSpawn = Math.random() * 5;
     for(var i = 0; i < nbSpawn; i++){
-      //var numSpawn = Math.random() * ;
-      game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
+      var numAdventurer = Number.parseInt(Math.random() * 2);
+      console.log(numAdventurer);
+      switch (numAdventurer){
+        case 0: 
+            game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
+            break;
+        case 1:
+            game.entityManager.add(new Healer(game, 50+ (i*30), 0));
+            break;
+      }
     }
 }
 
