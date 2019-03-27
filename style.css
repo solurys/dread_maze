@@ -6,7 +6,9 @@
 }
 
 canvas{
-	margin: unset;
+	margin: auto;
+	left : initial !important;
+	position: initial !important;
 }
 
 body{
