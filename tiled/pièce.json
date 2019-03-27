@@ -8,7 +8,7 @@
          "name":"logic",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -20,7 +20,7 @@
          "name":"sol",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":50,
          "x":0,
          "y":0
@@ -32,7 +32,7 @@
          "name":"decoration",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -44,7 +44,7 @@
          "name":"teleport",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":50,
          "x":0,
          "y":0
@@ -53,7 +53,7 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"left-up",
- "tiledversion":"1.2.2",
+ "tiledversion":"2019.03.13",
  "tileheight":16,
  "tilesets":[
         {
@@ -70,16 +70,43 @@
          "tilewidth":16
         }, 
         {
+         "columns":10,
          "firstgid":553,
-         "source":"logic.tsx"
+         "image":"logic.png",
+         "imageheight":160,
+         "imagewidth":160,
+         "margin":0,
+         "name":"logic",
+         "spacing":0,
+         "tilecount":100,
+         "tileheight":16,
+         "tilewidth":16
         }, 
         {
+         "columns":32,
          "firstgid":653,
-         "source":"cute_lpc.tsx"
+         "image":"cute_lpc.png",
+         "imageheight":512,
+         "imagewidth":512,
+         "margin":0,
+         "name":"cute_lpc",
+         "spacing":0,
+         "tilecount":1024,
+         "tileheight":16,
+         "tilewidth":16
         }, 
         {
+         "columns":10,
          "firstgid":1677,
-         "source":"Dungeon_Tileset.tsx"
+         "image":"Dungeon_Tileset.png",
+         "imageheight":160,
+         "imagewidth":160,
+         "margin":0,
+         "name":"Dungeon_Tileset",
+         "spacing":0,
+         "tilecount":100,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",

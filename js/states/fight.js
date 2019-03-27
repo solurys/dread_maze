@@ -2,13 +2,9 @@ class FightState extends Phaser.State {
   preload(game) {
     // initialisation des outils de debug
     gameDebug.init();
-    
-    game.load.image('carte', 'sprites/Carte/Level1/level1B.png');
   }
   create(game) {
     this.cursors = game.input.keyboard.createCursorKeys();
-    var carte = game.add.sprite(0, 0, 'carte');
-    carte.sendToBack(); // carte en dessous de toute sprite
 
     // Timer
     this.eventTimer = game.time.events.loop(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND*5, this.spawnVague, this);
@@ -28,9 +24,9 @@ class FightState extends Phaser.State {
     game.entityManager.update();
     game.cameraManager.handleInput(this.cursors);
     game.cameraManager.updateFollow();
-    
+
     var texte = "Time spawn : ";
-    
+
     var time = this.eventTimer.timer.duration.toFixed(0)
     var secondes = Number.parseInt(time / Phaser.Timer.SECOND);
     var minutes = Number.parseInt(secondes / 60);
@@ -63,5 +59,3 @@ class FightState extends Phaser.State {
     gameDebug.draw();
   }
 }
-
-
