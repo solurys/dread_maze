@@ -89,6 +89,7 @@ function closePopup(){
 
 function closeGame(){
   if (confirm("Fermeture de la fenetre?")){
-    window.location.replace("http://google.com");
+    //window.history.back();
+    window.location.replace("about:home");
   }
 }
