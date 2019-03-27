@@ -111,17 +111,50 @@ window.gameDebug = window.gdb = {
     game.input.onDown.add(this.onClick, this);
   },
 
+  showCollisionLayer: function() {
+    if (game.tiledmapManager && game.tiledmapManager.logicLayer.exists) {
+      const layer = game.tiledmapManager.logicLayer;
+      const group = game.tiledmapManager.layerGroup;
+      group.bringToTop(layer);
+      layer.alpha = 0.3;
+      layer.renderable = true;
+    }
+  },
+
+  hideCollisionLayer: function() {
+    if (game.tiledmapManager && game.tiledmapManager.logicLayer.exists) {
+      const layer = game.tiledmapManager.logicLayer;
+      const group = game.tiledmapManager.layerGroup;
+      group.sendToBack(layer);
+      layer.renderable = false;
+    }
+  },
+
   // rendu du debug sur le jeu (appellé dans renderer() des states)
   draw: function() {
     var groups = this.values(this.pgr());
+
+    if (this.body) { this.showCollisionLayer(); }
+    else           { this.hideCollisionLayer(); }
+
     for (var gr of groups) {
       gr.forEach(entity => {
         if (entity.debugEnabled) {
-          if (this.ia && entity.alive && entity.ia) { entity.ia.debug(); }
-          if (this.body) { game.debug.body(entity, this.bodyColor[gr.name], this.bodyColor.filled); }
+          if (this.ia) { this.drawIA(entity); }
+          if (this.body) { this.drawBody(entity, gr); }
         }
       });
     }
+  },
+
+  drawIA: function(entity) {
+    if (entity.alive && entity.ia) {
+      entity.ia.debug();
+    }
+  },
+
+  drawBody: function(entity, gr) {
+    game.debug.body(entity, this.bodyColor[gr.name], this.bodyColor.filled);
   },
 
   /**** méthodes de débogage super puissantes ****/
