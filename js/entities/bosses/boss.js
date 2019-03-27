@@ -1,12 +1,20 @@
 class Boss extends Actor {
   constructor(game, config) {
     super(game, config);
-    this.pv = game.add.text(280,540, "");
-    this.mana = game.add.text(280,570,"")
+    
+    // PV
+    this.pv = game.add.text(280,540, "", {fill: "#8A0808"});
+    this.spritePV = game.add.sprite(245,537,'heart');
+
+    // MP
+    this.mana = game.add.text(280,570,"", {fill: "#0B0B61"})
+    this.spriteMana= game.add.sprite(245,566,'mana');
   }
 
   static preload(game) {
     Andrax.preload(game);
+        game.load.image('heart', 'sprites/HUD/heart.png');
+        game.load.image('mana', 'sprites/HUD/mana.png');
   }
 
   update(game){

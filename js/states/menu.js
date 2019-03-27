@@ -90,6 +90,7 @@ function closePopup(){
 function closeGame(){
   if (confirm("Fermeture de la fenetre?")){
     //window.history.back();
-    window.location.replace("about:home");
+    //window.location.replace("about:home");
+    window.location.replace("https://www.google.fr");
   }
 }
