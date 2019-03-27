@@ -51,10 +51,10 @@ class Actor extends Entity {
   attack(entity) {
     if (this.isAttacking)
       return false;
-    
-    if(entity !== undefined && Math.random() > entity.dodgeRate){
-        entity.damage(Math.abs(this.strength - entity.defense));
-        console.log(Math.abs(this.strength - entity.defense));
+
+    if(entity !== undefined && Math.random() > entity.dodgeRate && this.strength > entity.defense){
+        entity.damage(this.strength - entity.defense);
+        console.log(this.strength - entity.defense);
     }
     // animation
     var direction = this.facingDirection; // par defaut
