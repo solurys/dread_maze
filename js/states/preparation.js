@@ -45,51 +45,13 @@ class PreparationState extends Phaser.State {
 
     // Mise en commentaire car création via bouton IG
 	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
-
-    // Timer -- Faire plus propre (Reset pour atteindre un nombre de secondes écoulés dans le jeu depuis le clic sur play)
-    game.time.reset();
-    this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
-    
-
     
   }
+  
   update(game) {
-    // le joueur met en place le dungeon
-
-    var texte = "Time preparation left : ";
-
-    var time = game.time.totalElapsedSeconds();
-    var secondes = Number.parseInt(time);
-    var minutes = 60 - Number.parseInt(secondes / 60);
-    secondes = secondes%60;
-
-    if(minutes < 10){
-        texte += "0"
-    }
-    texte += minutes + ":"
-
-    if(secondes <10){
-        texte +="0"
-    }
-    texte += secondes
-
-    // Si compteur inférieur à 1 minute et que les secondes sont pairs
-    if(minutes == 0 && secondes%2 == 0){
-    	this.text.setStyle({ fill: "#ffffff", backgroundColor: "#000000"});
-    }
-    // Si compteur inférieur à 1 minute et que les secondes sont impairs
-    else if(minutes == 0 && secondes%2 != 0){
-    	this.text.setStyle({ fill: "#ff0000", backgroundColor: "#000000"});
-    }
-
-    this.text.setText(texte);
-
-
-
-
-    if(game.time.totalElapsedSeconds() >= 5){
-    	game.state.start('fight', false);
-    	this.text.kill();
-    }
+  	
+    	// le joueur met en place le dungeon
+        game.state.start('fight', false);
   }
+
 }
