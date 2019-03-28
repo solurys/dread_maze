@@ -6,10 +6,12 @@ class FightState extends Phaser.State {
   create(game) {
     this.cursors = game.input.keyboard.createCursorKeys();
 
+    // Spawn après le timer de préparation
+    this.spawnVague();
+
     // Timer
     this.eventTimer = game.time.events.loop(/*Phaser.Timer.MINUTE * 1*/ + Phaser.Timer.SECOND*5, this.spawnVague, this);
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#000000"});
-    this.preparation = false;
   }
 
   // Méthode pour spawn les aventuriers
@@ -39,35 +41,35 @@ class FightState extends Phaser.State {
     game.cameraManager.handleInput(this.cursors);
     game.cameraManager.updateFollow();
 
-    if(!this.preparation){
-	    var texte = "Time spawn : ";
 
-	    var time = this.eventTimer.timer.duration.toFixed(0)
-	    var secondes = Number.parseInt(time / Phaser.Timer.SECOND);
-	    var minutes = Number.parseInt(secondes / 60);
-	    secondes = secondes%60;
+    var texte = "Time spawn : ";
 
-	    if(minutes < 10){
-	        texte += "0"
-	    }
-	    texte += minutes + ":"
+    var time = this.eventTimer.timer.duration.toFixed(0)
+    var secondes = Number.parseInt(time / Phaser.Timer.SECOND);
+    var minutes = Number.parseInt(secondes / 60);
+    secondes = secondes%60;
 
-	    if(secondes <10){
-	        texte +="0"
-	    }
-	    texte += secondes
+    if(minutes < 10){
+        texte += "0"
+    }
+    texte += minutes + ":"
 
-	    // Si compteur inférieur à 1 minute et que les secondes sont pairs
-	    if(minutes == 0 && secondes%2 == 0){
-	    	this.text.setStyle({ fill: "#ffffff", backgroundColor: "#000000"});
-	    }
-	    // Si compteur inférieur à 1 minute et que les secondes sont impairs
-	    else if(minutes == 0 && secondes%2 != 0){
-	    	this.text.setStyle({ fill: "#ff0000", backgroundColor: "#000000"});
-	    }
+    if(secondes <10){
+        texte +="0"
+    }
+    texte += secondes
 
-	    this.text.setText(texte);
-	}
+    // Si compteur inférieur à 1 minute et que les secondes sont pairs
+    if(minutes == 0 && secondes%2 == 0){
+    	this.text.setStyle({ fill: "#ffffff", backgroundColor: "#000000"});
+    }
+    // Si compteur inférieur à 1 minute et que les secondes sont impairs
+    else if(minutes == 0 && secondes%2 != 0){
+    	this.text.setStyle({ fill: "#ff0000", backgroundColor: "#000000"});
+    }
+
+    this.text.setText(texte);
+	
   }
 
   render(game) {
