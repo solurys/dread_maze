@@ -8,7 +8,7 @@ class PreparationState extends Phaser.State {
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
     var room = 'room';
-    
+
 
     game.load.image('gold', 'sprites/HUD/gold.png');
 
@@ -28,7 +28,7 @@ class PreparationState extends Phaser.State {
 
   create(game) {
     game.tiledmapManager.createLayers();
-    
+
     game.backgroundMusic.destroy();
     game.backgroundMusic = game.add.audio('intervague');
     game.backgroundMusic.play();
@@ -60,18 +60,18 @@ class PreparationState extends Phaser.State {
     // Timer -- Faire plus propre (Reset pour atteindre un nombre de secondes écoulés dans le jeu depuis le clic sur play)
     game.time.reset();
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
-    
+
     game.varGold = 250;
     game.add.sprite(370,540,'gold');
     this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
   }
-  
+
   update(game) {
-  	
+
     game.entityManager.update();
 
-    
+
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
