@@ -16,7 +16,7 @@ class MenuState extends Phaser.State {
 
       var propos = "Projet de 4ème Semestre \n \n"+
                     "Ce jeu a été réalisé dans le cadre du projet de 4ème semestre de l'année 2019 par : \n \n"+
-                    "CARBONERO Jack, DESFOURNEAUX Victor, FRANCEZ Gabriel, HANZ Anaël et LAPORTE Maëlle \n\n" +
+                    "CARBONERO Jack, DESFOURNEAUX Victor, FRANCEZ Gabriel, HANCE Anaël et LAPORTE Maëlle \n\n" +
                     "Merci à Monsieur BLANCHARD d'avoir supervisé ce projet \n\n" +
                     "© Dread Maze I - 2019";
 
