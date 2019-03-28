@@ -40,6 +40,7 @@ class MonstreHealer extends IA {
 
     selectSpellRevive() {
         let entities = filterTargets(this, [this.game.entityManager.monsters])
+        .sameRoom()
         .dead() //récupération des entités mortes
         .sortByDistance() //mort le plus proche
         .toArray();

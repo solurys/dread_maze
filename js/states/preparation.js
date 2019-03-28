@@ -56,6 +56,9 @@ class PreparationState extends Phaser.State {
   
   update(game) {
   	
+    game.entityManager.update();
+
+    
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
