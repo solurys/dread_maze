@@ -15,6 +15,8 @@ class PreparationState extends Phaser.State {
     //   [null, room, null],
     //   [null, room, null]
     // ]);
+    //firefox ne supporte pas les mp3
+
 
     game.roomManager.setRooms(1,1,[[room]]);
 
@@ -22,6 +24,10 @@ class PreparationState extends Phaser.State {
   }
   create(game) {
     game.tiledmapManager.createLayers();
+    
+    game.backgroundMusic.destroy();
+    game.backgroundMusic = game.add.audio('intervague');
+    game.backgroundMusic.play();
     // Création de l'HUD
     var h = new HUD(game);
 
@@ -52,7 +58,7 @@ class PreparationState extends Phaser.State {
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
     
 
-    
+    console.log('prep');
   }
   
   update(game) {

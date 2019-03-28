@@ -4,6 +4,10 @@ class FightState extends Phaser.State {
     gameDebug.init();
   }
   create(game) {
+    game.backgroundMusic.destroy();
+    game.backgroundMusic = game.add.audio('vague');
+    game.backgroundMusic.play();
+
     this.cursors = game.input.keyboard.createCursorKeys();
 
     this.compteurVague = 0;
@@ -14,6 +18,7 @@ class FightState extends Phaser.State {
     // Timer
     this.eventTimer = game.time.events.loop(/*Phaser.Timer.MINUTE * 1*/ + Phaser.Timer.SECOND*5, this.spawnVague, this);
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#000000"});
+    console.log('fight');
   }
 
   // Méthode pour spawn les aventuriers
