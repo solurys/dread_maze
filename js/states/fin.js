@@ -32,7 +32,7 @@ class FinState extends Phaser.State {
 
       // Le boss est mort
       if(this.game.varHealth == 0){
-      //  game.add.sprite(0,0,'dead');
+        game.add.sprite(0,0,'dead');
       //  //Text Popup
       //  var mort = "YOU ARE DEAD !"
 
@@ -61,7 +61,7 @@ class FinState extends Phaser.State {
         var buttonRestart = game.add.button(400 , 300, 'restart', () => {game.state.start('preparation',true)}, this, 2, 1, 0);
       }
       else {
-        //game.add.sprite(0,0,'win');
+        game.add.sprite(0,0,'win');
         //Text Popup
         //var win = "YOU ARE THE WINNER !"
 //
