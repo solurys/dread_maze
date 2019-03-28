@@ -13,9 +13,10 @@ class HUD {
         game.load.image('hud', 'sprites/HUD/hud.png');
 
         // Charger tous les sorts ici
-        game.load.image('p1', 'sprites/HUD/orc.png');
-        game.load.image('p2', 'sprites/HUD/skeleton.png');
-        game.load.image('p3', 'sprites/HUD/wizard.png');
+        game.load.image('m1', 'sprites/HUD/orc.png');
+        game.load.image('m2', 'sprites/HUD/skeleton.png');
+        game.load.image('m3', 'sprites/HUD/wizard.png');
+        game.load.image('p1', 'sprites/HUD/spikeTrap.png');
     }
 
 }

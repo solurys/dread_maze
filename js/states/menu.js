@@ -68,7 +68,7 @@ class MenuState extends Phaser.State {
         popup.addChild(textPop);
         popup.addChild(closeButton);
 
-        var textTitle = game.add.text(0, 0, "Dread Maze I", styleTitle);
+        var textTitle = game.add.text(40, 0, "Dread Maze I", styleTitle);
     }
 
 }
