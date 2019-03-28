@@ -5,7 +5,7 @@ class Skeleton extends Monster {
       y: y,
       sprite: 'skeleton',
       stats: {
-        hpMax: 5,
+        hpMax: 10,
         mpMax: 0,
         strength: 3,
         defense: 0,

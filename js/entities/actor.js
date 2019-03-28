@@ -5,6 +5,10 @@ class Actor extends Entity {
       config.frame = 'walk-down-0';
     }
 
+    if (config.oversize === undefined) {
+      config.oversize = false;
+    }
+
     super(game, config);
     //this.ia = config.ia; // impossible : ia prend en paramètre this
     this.baseAttack = config.baseAttack;
@@ -25,6 +29,7 @@ class Actor extends Entity {
     // ne marche pas en 128x128
     game.physics.arcade.enable(this);
     this.body.setSize(35, 55, 15, 10);
+    this.oversize = config.oversize;
   }
   damage(amount) {
     console.log(amount - this.defense);
@@ -71,8 +76,13 @@ class Actor extends Entity {
     // bloque les mouvement lors de l'attaque
     if (anim !== undefined) {
       this.isAttacking = true;
+      if (this.oversize)
       this.body.velocity.setTo(0, 0);
+      if (this.oversize) {
+        this.body.setSize(35, 55, 15*5, 10*7);
+      }
       anim.onComplete.addOnce(() => {
+        this.body.setSize(35, 55, 15, 10);
         this.isAttacking = false;
         this.stop();
       }, this);

@@ -5,10 +5,10 @@ class Paladin extends Adventurer {
       y: y,
       sprite: 'paladin',
       stats: {
-        hpMax: 10,
+        hpMax: 20,
         mpMax: 0,
         strength: 2,
-        defense: 8,
+        defense: 4,
         dodgeRate: 0.1
       },
       baseAttack: 'slash'
