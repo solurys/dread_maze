@@ -4,6 +4,9 @@ class InitState extends Phaser.State {
     Entity.preload(game);
     HUD.preload(game);
 
+    game.load.image('back', 'sprites/Menu/buttonRetour.png');
+
+
     game.stage.backgroundColor = "#4488AA";
     game.load.audio ('accueil', ['sprites/Music/accueil.mp3','sprites/Music/accueil.ogg']);
     game.load.audio ('intervague', ['sprites/Music/intervague.mp3','sprites/Music/intervague.ogg']);
@@ -11,6 +14,7 @@ class InitState extends Phaser.State {
     game.load.audio ('vague', ['sprites/Music/vague.mp3','sprites/Music/vague.ogg']);
     
     
+
 
 
   }
