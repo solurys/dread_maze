@@ -1,103 +1,132 @@
 // classe IA de base
 
 class MonstreCaster extends IA {
-    // self : entité controllée par l'ia
-    constructor(self, speed = 100, range_attack = 40, range_detection = 100, est_dist = false, type = 0) {
-      super(self);
-      this.etat = 1; // état inerte par défaut
-      this.target = null;
-      this.destination = {x: this.self.x, y: this.self.x};
-      this.speed = speed;
-      this.range_attack = range_attack;
-      this.range_detection = range_detection;
-      this.est_distance = est_dist;
-      this.type = type;
+  // self : entité controllée par l'ia
+  constructor(self, speed = 100, range_attack = 30, range_detection = 100) {
+    super(self);
+    this.etat = 1; // état inerte par défaut
+    this.target = null;
+    this.destination = {x: this.self.x, y: this.self.x};
+    this.speed = speed;
+    this.range_attack = range_attack;
+    this.range_detection = range_detection;
+    //ajouter ici attributs de sort
+    this.spells = null;
+    /*
+    {
+      soutien: ShieldPlus,
+      heal: MIDHeal,
+      resurection: Resurection
     }
-    //Mise à jour et choix du comportement de l'entité
-    update() {
-      var that = this;
-      function detecterProche () {
-          return filterTargets(that.self, [that.self.game.entityManager.adventurers])
-                  // filtres
-                  .alive() // en vie, pas mort
-                  .nearby(that.range_detection) //dans la range
-                  // tris
-                  .sortByDistance() // Autre filtre ?
-                  // accesseur
-                  .first();
+    */
+  }
+
+  selectTypeSpell() {
+
+      // utiliser this.targets pour savoir sur qui faire l'action
+      if(this.selectSpellMulti()) {
+          //selection spell heal
+      } else if(this.selectSpellOne()) {
+          //selection spell revive
+      } else if(this.selectNormalAttack()) {
+          //selection attaque normal
+      } else {
+          //ne rien faire
+          this.targets = [];
       }
-      function mouvementAleatoire() {
-        var epsilon = 10;
-        var pos = {x: that.self.centerX, y: that.self.centerY};
-        if (Math.abs(that.destination.x - pos.x) < epsilon && Math.abs(that.destination.y - pos.y) < epsilon){
-          that.destination = {x: Phaser.Math.between(0,800), y: Phaser.Math.between(0,600)}; //limitation à la salle
-        }
-        else {
-          var vel = Vector.from_to(pos, that.destination).normalize().multiply(that.speed);
-          that.self.walk(vel);
-        }
+  }
+
+  selectSpellMulti() {
+      let entities = filterTargets(this, [this.game.entityManager.adventurers])
+      .sameRoom()
+      .alive() //récupération des entités vivantes
+      .toArray();
+
+      this.targets = entities;
+
+      let pv = 0;
+      let pvmax = 0;
+      for (let element of entities) {
+          pv += element.health;
+          pvmax += element.maxHealth;
       }
-  
-      switch(this.etat) {
-            case 1: //patrouille
-              //le personnage se déplace aléatoirement dans la piece
-              mouvementAleatoire();
-              //si ennemi detecté etat attaque
-              this.target = detecterProche();
-              if (this.target != undefined)
-                  this.etat = 2;
-              break;
-          case 2: //attaque
-              // si la cible est morte
-              if (this.target.alive === false) {
-                this.etat = 1;
-              }
-              // si la cible est à portée d'attaque
-              if (Math2D.rangeCheck(this.self, this.target, this.range_attack)) {
-                this.self.attack(this.target);
-              }
-  
-              // si la cible est hors de détection
-              else if (!Math2D.rangeCheck(this.self, this.target, this.range_detection)) {
-                this.etat = 1;
-              }
-  
-              // n'est pas à portée d'attaque mais détecté
-              // on s'approche
-              else{
-                var vel = Vector.from_to(that.self, that.target).normalize().multiply(that.speed);
-                this.self.walk(vel);
-              }
-              break;
-        }
+      
+      return this.targets >= 4 && pv > pvmax/8;
+  }
+
+  selectSpellOne() {
+      let  entities = filterTargets(this, [this.game.entityManager.adventurers])
+      .sameRoom() // monstre dans la même salle
+      .alive() // monstre en vie
+      .nearby(this.range_detection) // monstre dans la zone de détection
+      .toArray();
+
+      this.targets = entities;
+
+      let pv = 0;
+      let pvmax = 0;
+      for (let element of entities) {
+          pv += element.health;
+          pvmax += element.maxHealth;
+      }
+      
+      return entities.length > 0 && pv < pvmax/2;
+  }
+
+  selectNormalAttack() {
+     let entities = filterTargets(this, [this.game.entityManager.adventurers])
+    .sameRoom() // même salle 
+    .alive() // en vie
+    .sortByDistance() //le plus proche
+    .toArray();
+
+    return entities.length > 0;
+  }
+
+  mouvementAleatoire() {
+    var epsilon = 10;
+    var pos = {x: this.centerX, y: this.centerY};
+    if (Math.abs(this.destination.x - pos.x) < epsilon && Math.abs(this.destination.y - pos.y) < epsilon){
+      this.destination = {x: Phaser.Math.between(0,800), y: Phaser.Math.between(0,600)}; //limitation à la salle -- TODO
     }
-
-
-    //Méthode de débuggage
-    debug() {
-      var s = this.self;
-
-      var rd = this.range_detection;
-      var ra = this.range_attack;
-
-      var rec_rd = new Phaser.Rectangle(s.x-rd, s.y-rd, s.width+rd*2, s.height+rd*2);
-      var rec_ra = new Phaser.Rectangle(s.x-ra, s.y-ra, s.width+ra*2, s.height+ra*2);
-
-      var dg = this.self.game.debug;
-      dg.rectangle(rec_rd, 'yellow', false);
-      dg.rectangle(rec_ra, 'red', false);
-      switch(this.etat) {
-        case 1:
-          var dest = this.destination;
-          var line_dest = new Phaser.Line(s.centerX, s.centerY, dest.x, dest.y);
-          dg.geom(line_dest, 'black');
-          break;
-        case 2:
-          var t = this.target;
-          var line_target = new Phaser.Line(s.centerX, s.centerY, t.centerX, t.centerY);
-          dg.geom(line_target, 'red');
-          break;
-      }
+    else {
+      var vel = Vector.from_to(pos, this.destination).normalize().multiply(this.speed);
+      this.walk(vel);
     }
+  }
+
+  update() {
+      this.selectTypeSpell();
+      if (this.targets.length == 0) {
+          this.mouvementAleatoire();
+      }
+  }
+  
+  debug() {
+    var s = this.self;
+
+    var rd = this.range_detection;
+    var ra = this.range_attack;
+
+    var rec_rd = new Phaser.Rectangle(s.left, s.top, s.width, s.height);
+    rec_rd.inflate(rd, rd);
+    var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
+    rec_ra.inflate(ra,ra);
+    
+    var dg = this.self.game.debug;
+    dg.rectangle(rec_rd, 'yellow', false);
+    dg.rectangle(rec_ra, 'red', false);
+    switch(this.etat) {
+      case 1:
+        var dest = this.destination;
+        var line_dest = new Phaser.Line(s.centerX, s.centerY, dest.x, dest.y);
+        dg.geom(line_dest, 'black');
+        break;
+      case 2:
+        var t = this.target;
+        var line_target = new Phaser.Line(s.centerX, s.centerY, t.centerX, t.centerY);
+        dg.geom(line_target, 'red');
+        break;
+    }
+  }
 }
-  

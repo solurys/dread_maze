@@ -5,5 +5,6 @@ class Adventurer extends Actor {
   static preload(game) {
     Swordsman.preload(game);
     Paladin.preload(game);
+    Healer.preload(game);
   }
 }

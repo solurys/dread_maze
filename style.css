@@ -1,0 +1,22 @@
+@font-face {
+	font-family: "flipps";
+	font-style: normal;
+	font-weight: 400;
+	src: url("font/Fipps-Regular.otf");
+}
+
+canvas{
+	margin: auto;
+	left : initial !important;
+	position: initial !important;
+}
+
+body{
+	color: white;
+	text-align: center;
+	background-image: url("sprites/Menu/background.png");
+	background-size: cover;
+	background-position: center, center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}

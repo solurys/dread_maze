@@ -42,5 +42,6 @@ class EntityManager {
     phys.collide(this.adventurers, this.bosses);
     phys.collide(this.monsters, this.bosses);
     phys.collide(this.adventurers, this.monsters);
+    phys.collide(this.game.tiledmapManager.logicLayer, [this.adventurers, this.bosses, this.monsters])
   }
 }
