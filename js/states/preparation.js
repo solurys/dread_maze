@@ -1,5 +1,6 @@
 class PreparationState extends Phaser.State {
   preload(game) {
+    gameDebug.init();
     game.tiledmapManager = new TiledmapManager(game, {
       map: 'tiled/pièce.json',
       tileset: ['tiled/cute_lpc.png', 'tiled/dungeon_tiles.png', 'tiled/Dungeon_Tileset.png', 'tiled/logic.png']
@@ -14,6 +15,8 @@ class PreparationState extends Phaser.State {
     //   [null, room, null],
     //   [null, room, null]
     // ]);
+    //firefox ne supporte pas les mp3
+
 
     game.roomManager.setRooms(1,1,[[room]]);
 
@@ -21,6 +24,10 @@ class PreparationState extends Phaser.State {
   }
   create(game) {
     game.tiledmapManager.createLayers();
+    
+    game.backgroundMusic.destroy();
+    game.backgroundMusic = game.add.audio('intervague');
+    game.backgroundMusic.play();
     // Création de l'HUD
     var h = new HUD(game);
 
@@ -41,7 +48,7 @@ class PreparationState extends Phaser.State {
     // Mise en commentaire car création via bouton IG
     /*var orc1 = game.entityManager.add(new Orc(game, 300, 300));*/
 
-    var pal1 = game.entityManager.add(new Paladin(game, 666 , 600));
+    //var pal1 = game.entityManager.add(new Paladin(game, 300 , 300));
 
     // Mise en commentaire car création via bouton IG
 	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
@@ -51,7 +58,7 @@ class PreparationState extends Phaser.State {
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
     
 
-    
+    console.log('prep');
   }
   
   update(game) {
@@ -62,7 +69,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 90;
+    var tempsPreparation = 10;
 
     var texte = "Time preparation left : ";
 
@@ -97,6 +104,10 @@ class PreparationState extends Phaser.State {
         this.text.kill();
     }
 
+  }
+
+  render(game) {
+    gameDebug.draw();
   }
 
 }

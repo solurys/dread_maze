@@ -18,16 +18,22 @@ class Boss extends Actor {
   }
 
   update(game){
-  	if(this.health < 0){
-  		this.health = 0;
-  	}
-  	this.pv.setText(this.health + "/" + this.maxHealth);
-  	
-  	if(this.mp < 0){
-  		this.mp = 0;
-  	}
-  	this.mana.setText(this.mp + "/" + this.mpMax);
-  	
+    
+    if(this.health <= 0){
+      this.health = 0;
+      this.game.state.start('fin', true); 
+    }
+
+    this.pv.setText(this.health + "/" + this.maxHealth);
+    
+    // Stocke les PV du boss pour les réutiliser après dans FinState
+    this.game.varHealth = this.health;
+    
+    if(this.mp < 0){
+      this.mp = 0;
+    }
+    this.mana.setText(this.mp + "/" + this.mpMax);
+
   	super.update(game);
   }
 }
