@@ -1,5 +1,6 @@
 class PreparationState extends Phaser.State {
   preload(game) {
+    gameDebug.init();
     game.tiledmapManager = new TiledmapManager(game, {
       map: 'tiled/pièce.json',
       tileset: ['tiled/cute_lpc.png', 'tiled/dungeon_tiles.png', 'tiled/Dungeon_Tileset.png', 'tiled/logic.png']
@@ -97,6 +98,10 @@ class PreparationState extends Phaser.State {
         this.text.kill();
     }
 
+  }
+
+  render(game) {
+    gameDebug.draw();
   }
 
 }
