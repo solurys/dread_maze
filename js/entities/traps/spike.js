@@ -13,7 +13,7 @@ class Spike extends Trap {
   }
   activate(adventurer) {
     console.log('activate');
-    adventurer.damage(8);
+    adventurer.damage(5);
     super.activate(adventurer);
   }
 }

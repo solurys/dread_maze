@@ -5,9 +5,9 @@ class Orc extends Monster {
       y: y,
       sprite: 'orc',
       stats: {
-        hpMax: 8,
+        hpMax: 14,
         mpMax: 0,
-        strength: 10,
+        strength: 7,
         defense: 4,
         dodgeRate: 0.3
       },
