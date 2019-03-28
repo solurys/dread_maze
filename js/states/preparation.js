@@ -41,7 +41,7 @@ class PreparationState extends Phaser.State {
     // Mise en commentaire car création via bouton IG
     /*var orc1 = game.entityManager.add(new Orc(game, 300, 300));*/
 
-    var pal1 = game.entityManager.add(new Paladin(game, 666 , 600));
+    //var pal1 = game.entityManager.add(new Paladin(game, 300 , 300));
 
     // Mise en commentaire car création via bouton IG
 	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
@@ -62,7 +62,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 90;
+    var tempsPreparation = 10;
 
     var texte = "Time preparation left : ";
 

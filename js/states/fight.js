@@ -6,6 +6,8 @@ class FightState extends Phaser.State {
   create(game) {
     this.cursors = game.input.keyboard.createCursorKeys();
 
+    this.compteurVague = 0;
+
     // Spawn après le timer de préparation
     this.spawnVague();
 
@@ -34,6 +36,8 @@ class FightState extends Phaser.State {
             break;
       }
     }
+    console.log("test");
+    this.compteurVague++;
 }
 
   update(game) {
@@ -41,6 +45,9 @@ class FightState extends Phaser.State {
     game.cameraManager.handleInput(this.cursors);
     game.cameraManager.updateFollow();
 
+
+    // Nombre de vagues souhaités
+    var nbVagues = 3;
 
     var texte = "Time spawn : ";
 
@@ -50,14 +57,14 @@ class FightState extends Phaser.State {
     secondes = secondes%60;
 
     if(minutes < 10){
-        texte += "0"
+        texte += "0";
     }
-    texte += minutes + ":"
+    texte += minutes + ":";
 
     if(secondes <10){
-        texte +="0"
+        texte +="0";
     }
-    texte += secondes
+    texte += secondes;
 
     // Si compteur inférieur à 1 minute et que les secondes sont pairs
     if(minutes == 0 && secondes%2 == 0){
@@ -69,6 +76,15 @@ class FightState extends Phaser.State {
     }
 
     this.text.setText(texte);
+
+    if(this.compteurVague == nbVagues){
+      this.eventTimer.timer.running = false;
+      this.text.kill();
+    }
+
+    if(this.compteurVague == nbVagues && game.entityManager.adventurers.getFirstAlive() == null){
+      game.state.start('fin', true);
+    }
 	
   }
 
