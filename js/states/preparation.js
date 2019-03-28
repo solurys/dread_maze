@@ -61,7 +61,7 @@ class PreparationState extends Phaser.State {
     game.time.reset();
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
     
-    game.varGold = 500;
+    game.varGold = 250;
     game.add.sprite(370,540,'gold');
     this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
