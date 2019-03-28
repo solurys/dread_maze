@@ -59,15 +59,11 @@ class PreparationState extends Phaser.State {
 
     // Timer -- Faire plus propre (Reset pour atteindre un nombre de secondes écoulés dans le jeu depuis le clic sur play)
     game.time.reset();
-<<<<<<< HEAD
+    
     this.text = game.add.text(210,25, "", {fill: "#ffffff"});
     
     game.varGold = 500;
-=======
-    this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
 
-    game.varGold = 250;
->>>>>>> 2e997282badad768cab587bd21738783c5d3ba81
     game.add.sprite(370,540,'gold');
     this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
