@@ -59,9 +59,9 @@ class PreparationState extends Phaser.State {
 
     // Timer -- Faire plus propre (Reset pour atteindre un nombre de secondes écoulés dans le jeu depuis le clic sur play)
     game.time.reset();
-    
+
     this.text = game.add.text(210,25, "", {fill: "#ffffff"});
-    
+
     game.varGold = 500;
 
     game.add.sprite(370,540,'gold');
@@ -77,7 +77,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 30;
+    var tempsPreparation = 5;
 
     var texte = "Time preparation left : ";
 

@@ -12,6 +12,9 @@ class Actor extends Entity {
     super(game, config);
     //this.ia = config.ia; // impossible : ia prend en paramètre this
     this.baseAttack = config.baseAttack;
+    this.projectile = config.projectile;
+    this.enemies = config.enemies;
+
     this.health = config.stats.hpMax; // vie courante
     this.maxHealth = config.stats.hpMax; // vie maximum
     this.mp = config.stats.mpMax; // points de magie courant
@@ -63,9 +66,12 @@ class Actor extends Entity {
     if (this.isAttacking)
       return false;
 
-    if(entity !== undefined && Math.random() > entity.dodgeRate){
+    if(entity !== undefined && this.projectile === undefined && Math.random() > entity.dodgeRate){
         entity.damage(this.strength);
         console.log(this.strength - entity.defense);
+    }
+    else if (entity !== undefined && this.projectile !== undefined) {
+        this.game.entityManager.add(new this.projectile(game, this.x, this.y, this.enemies));
     }
     // animation
     var direction = this.facingDirection; // par defaut

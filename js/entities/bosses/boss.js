@@ -1,7 +1,8 @@
 class Boss extends Actor {
   constructor(game, config) {
+    config.enemies = [Adventurer];
     super(game, config);
-    
+
     // PV
     this.pv = game.add.text(280,540, "", {fill: "#8A0808"});
     this.spritePV = game.add.sprite(245,537,'heart');
@@ -18,17 +19,17 @@ class Boss extends Actor {
   }
 
   update(game){
-    
+
     if(this.health <= 0){
       this.health = 0;
-      this.game.state.start('fin', true); 
+      this.game.state.start('fin', true);
     }
 
     this.pv.setText(this.health + "/" + this.maxHealth);
-    
+
     // Stocke les PV du boss pour les réutiliser après dans FinState
     this.game.varHealth = this.health;
-    
+
     if(this.mp < 0){
       this.mp = 0;
     }

@@ -18,6 +18,8 @@ var LPC_Atlas = {
     slash: {length: 6},
     shoot: {length: 13},
     dragonSpear: {length: 8},
+    longSword: {length: 6},
+    cudgel: {length: 6},
     die: {length: 6, noDirection: true}
   },
   setup_basic_lpc_animations : function(sprite) {

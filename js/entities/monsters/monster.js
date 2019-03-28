@@ -1,6 +1,6 @@
 class Monster extends Actor {
   constructor(game, config) {
-
+    config.enemies = [Adventurer];
     super(game, config);
 
 
