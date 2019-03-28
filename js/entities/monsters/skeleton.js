@@ -28,4 +28,4 @@ class Skeleton extends Monster {
   }
 }
 
-Skeleton.price = 50;
+Skeleton.price = 25;
