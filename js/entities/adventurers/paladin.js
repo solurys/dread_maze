@@ -7,7 +7,7 @@ class Paladin extends Adventurer {
       stats: {
         hpMax: 10,
         mpMax: 0,
-        strength: 40,
+        strength: 2,
         defense: 8,
         dodgeRate: 0.1
       },
