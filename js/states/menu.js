@@ -38,13 +38,13 @@ class MenuState extends Phaser.State {
         buttonPlay.scale.x = 0.2;
         buttonPlay.scale.y = 0.2;
 
-        var buttonExit = game.add.button(game.world.centerX-61.7, game.world.centerY, 'buttonExit',  closeGame , this);
-        buttonExit.scale.x = 0.2;
-        buttonExit.scale.y = 0.2;
-
-        var buttonInfo = game.add.button(game.world.centerX-61.7, game.world.centerY+100, 'buttonInfo', openPopup, this);
+        var buttonInfo = game.add.button(game.world.centerX-61.7, game.world.centerY, 'buttonInfo', openPopup, this);
         buttonInfo.scale.x = 0.2;
         buttonInfo.scale.y = 0.2;
+
+        var buttonExit = game.add.button(game.world.centerX-61.7, game.world.centerY+100, 'buttonExit',  closeGame , this);
+        buttonExit.scale.x = 0.2;
+        buttonExit.scale.y = 0.2;
 
         // //popup info button
         var popup = game.add.sprite(400, 300, 'popupInfo');

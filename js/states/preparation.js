@@ -63,7 +63,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 10;
+    var tempsPreparation = 5;
 
     var texte = "Time preparation left : ";
 
