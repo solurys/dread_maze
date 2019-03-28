@@ -23,9 +23,9 @@ class FightState extends Phaser.State {
 
   // Méthode pour spawn les aventuriers
   spawnVague(){
-    
+
   	// Random pour le nombre d'aventuriers à spawn
-    var nbSpawn = Math.random() * 5;
+    var nbSpawn = Math.random() * 7;
 
     // Boucle qui crée les nbSpawn aventuriers
     for(var i = 0; i < nbSpawn; i++){
@@ -33,7 +33,7 @@ class FightState extends Phaser.State {
       // Random pour la classe de l'aventurier à spawn (0 : Paladin // 1 : Healer)
       var numAdventurer = Number.parseInt(Math.random() * 2);
       switch (numAdventurer){
-        case 0: 
+        case 0:
             game.entityManager.add(new Paladin(game, 50+ (i*30), 0));
             break;
         case 1:
@@ -52,7 +52,7 @@ class FightState extends Phaser.State {
 
 
     // Nombre de vagues souhaités
-    var nbVagues = 1;
+    var nbVagues = 3;
 
     var texte = "Time spawn : ";
 
@@ -90,7 +90,7 @@ class FightState extends Phaser.State {
     if(this.compteurVague == nbVagues && game.entityManager.adventurers.getFirstAlive() == null){
       game.state.start('fin', true);
     }
-	
+
   }
 
   render(game) {
