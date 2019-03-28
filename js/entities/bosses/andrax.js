@@ -8,7 +8,7 @@ class Andrax extends Boss {
         hpMax: 50,
         mpMax: 70,
         strength: 10,
-        defense: 10,
+        defense: 2,
         dodgeRate: 0.3
       },
       baseAttack: 'dragonSpear'
