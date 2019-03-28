@@ -6,7 +6,7 @@ class AdventurerCac extends IA {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
-    this.destination = {x: this.self.x, y: this.self.x};
+    this.destination = {x: Phaser.Math.between(0,800), y: Phaser.Math.between(0,600)};
     this.speed = speed;
     this.range_attack = range_attack;
     this.range_detection = range_detection;
