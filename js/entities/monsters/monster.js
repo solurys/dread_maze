@@ -6,7 +6,7 @@ class Monster extends Actor {
 
     // Pour la capture des mouvements / actions de la souris (Placement des monstres)
   	// Bon emplacement ?
-  	game.input.mouse.capture = true;  
+  	game.input.mouse.capture = true;
 
     this.alpha = 0.5;
     this.placer = false;
@@ -15,6 +15,8 @@ class Monster extends Actor {
   static preload(game) {
     Orc.preload(game);
     Skeleton.preload(game);
+    Blackwizard.preload(game);
+
   }
 
   update(game){
@@ -28,7 +30,7 @@ class Monster extends Actor {
   		this.placer = true;
   		this.alpha = 1;
   	}
-  	
+
 
   	super.update(this.game);
   }

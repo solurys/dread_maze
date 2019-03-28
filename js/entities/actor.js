@@ -26,6 +26,12 @@ class Actor extends Entity {
     game.physics.arcade.enable(this);
     this.body.setSize(35, 55, 15, 10);
   }
+  damage(amount) {
+    console.log(amount - this.defense);
+    if (amount - this.defense > 0) {
+      super.damage(amount - this.defense);
+    }
+  }
   update() {
     if (this.ia !== undefined && this.alive)
       this.ia.update();
@@ -52,8 +58,8 @@ class Actor extends Entity {
     if (this.isAttacking)
       return false;
 
-    if(entity !== undefined && Math.random() > entity.dodgeRate && this.strength > entity.defense){
-        entity.damage(this.strength - entity.defense);
+    if(entity !== undefined && Math.random() > entity.dodgeRate){
+        entity.damage(this.strength);
         console.log(this.strength - entity.defense);
     }
     // animation

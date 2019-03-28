@@ -8,6 +8,9 @@ class PreparationState extends Phaser.State {
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
     var room = 'room';
+    
+
+    game.load.image('gold', 'sprites/HUD/gold.png');
 
     // game.roomManager.setRooms(4, 3, [
     //   [room, null, null],
@@ -15,13 +18,20 @@ class PreparationState extends Phaser.State {
     //   [null, room, null],
     //   [null, room, null]
     // ]);
+    //firefox ne supporte pas les mp3
+
 
     game.roomManager.setRooms(1,1,[[room]]);
 
     game.cameraManager = new CameraManager(game, 0, 0);
   }
+
   create(game) {
     game.tiledmapManager.createLayers();
+    
+    game.backgroundMusic.destroy();
+    game.backgroundMusic = game.add.audio('intervague');
+    game.backgroundMusic.play();
     // Création de l'HUD
     var h = new HUD(game);
 
@@ -51,8 +61,10 @@ class PreparationState extends Phaser.State {
     game.time.reset();
     this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
     
+    game.varGold = 250;
+    game.add.sprite(370,540,'gold');
+    this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
-    
   }
   
   update(game) {
@@ -63,7 +75,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 10;
+    var tempsPreparation = 500;
 
     var texte = "Time preparation left : ";
 
@@ -92,6 +104,7 @@ class PreparationState extends Phaser.State {
     }
 
     this.text.setText(texte);
+    this.textGold.setText(game.varGold);
 
     if(game.time.totalElapsedSeconds() >= tempsPreparation){
         game.state.start('fight', false);

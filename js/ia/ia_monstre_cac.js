@@ -6,7 +6,7 @@ class MonstreCac extends IA {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
-    this.destination = {x: this.self.x, y: this.self.x};
+    this.destination = {x: Phaser.Math.between(0,800), y: Phaser.Math.between(0,600)};
     this.speed = speed;
     this.range_attack = range_attack;
     this.range_detection = range_detection;
@@ -79,7 +79,7 @@ class MonstreCac extends IA {
     rec_rd.inflate(rd, rd);
     var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
     rec_ra.inflate(ra,ra);
-    
+
     var dg = this.self.game.debug;
     dg.rectangle(rec_rd, 'yellow', false);
     dg.rectangle(rec_ra, 'red', false);
