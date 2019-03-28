@@ -17,3 +17,5 @@ class Spike extends Trap {
     super.activate(adventurer);
   }
 }
+
+Spike.price = 50;
