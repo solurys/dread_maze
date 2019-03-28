@@ -1,5 +1,6 @@
 class PreparationState extends Phaser.State {
   preload(game) {
+    gameDebug.init();
     game.tiledmapManager = new TiledmapManager(game, {
       map: 'tiled/pièce.json',
       tileset: ['tiled/cute_lpc.png', 'tiled/dungeon_tiles.png', 'tiled/Dungeon_Tileset.png', 'tiled/logic.png']
@@ -47,7 +48,7 @@ class PreparationState extends Phaser.State {
     // Mise en commentaire car création via bouton IG
     /*var orc1 = game.entityManager.add(new Orc(game, 300, 300));*/
 
-    var pal1 = game.entityManager.add(new Paladin(game, 666 , 600));
+    //var pal1 = game.entityManager.add(new Paladin(game, 300 , 300));
 
     // Mise en commentaire car création via bouton IG
 	/*var ske1 = game.entityManager.add(new Skeleton(game, 400, 400));*/
@@ -68,7 +69,7 @@ class PreparationState extends Phaser.State {
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 30;
+    var tempsPreparation = 10;
 
     var texte = "Time preparation left : ";
 
@@ -103,6 +104,10 @@ class PreparationState extends Phaser.State {
         this.text.kill();
     }
 
+  }
+
+  render(game) {
+    gameDebug.draw();
   }
 
 }
