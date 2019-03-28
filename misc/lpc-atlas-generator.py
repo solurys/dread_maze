@@ -36,7 +36,7 @@ def line(l, h=64):
     return l*h
 
 #atlas = initAtlas('skeleton.png', 832, 1344, 'RGBA8888')
-atlas = initAtlas('andrax.png', 1536, 2112, 'RGBA8888')
+atlas = initAtlas('paladin.png', 1536, 2112, 'RGBA8888')
 
 anim4DirLines(atlas, 7, 'spellcast', line(0))
 anim4DirLines(atlas, 8, 'thrust', line(4))
@@ -44,7 +44,8 @@ anim4DirLines(atlas, 9, 'walk', line(8))
 anim4DirLines(atlas, 6, 'slash', line(12))
 anim4DirLines(atlas, 13, 'shoot', line(16))
 animLine(atlas, 6, 'die', line(20))
-anim4DirLines(atlas, 8, 'dragonSpear', line(21), 192, 192);
+#anim4DirLines(atlas, 8, 'dragonSpear', line(21), 192, 192);
+anim4DirLines(atlas, 6, 'cudgel', line(21), 192, 192);
 
 import json
 
