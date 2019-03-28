@@ -26,4 +26,4 @@ class Blackwizard extends Monster {
   }
 }
 
-Blackwizard.price = 100;
+Blackwizard.price = 80;
