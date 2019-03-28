@@ -25,7 +25,10 @@ class Action {
 
     putWizard() {
         // Coordonnées sans importance
-        game.entityManager.add(new Blackwizard(game, 0, 0));
+        if(game.state.current == "preparation" && game.varGold >= Blackwizard.price){
+            game.entityManager.add(new Blackwizard(game, 0, 0));
+            game.varGold -= Blackwizard.price;
+        }
     }
 
 }
