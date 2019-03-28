@@ -26,4 +26,4 @@ class Orc extends Monster {
   }
 }
 
-Orc.price = 60;
+Orc.price = 50;
