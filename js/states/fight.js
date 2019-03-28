@@ -52,7 +52,7 @@ class FightState extends Phaser.State {
 
 
     // Nombre de vagues souhaités
-    var nbVagues = 3;
+    var nbVagues = 1;
 
     var texte = "Time spawn : ";
 
