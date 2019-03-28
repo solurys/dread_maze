@@ -8,7 +8,7 @@ class PreparationState extends Phaser.State {
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
     var room = 'room';
-    
+
 
     game.load.image('gold', 'sprites/HUD/gold.png');
 
@@ -28,7 +28,7 @@ class PreparationState extends Phaser.State {
 
   create(game) {
     game.tiledmapManager.createLayers();
-    
+
     game.backgroundMusic.destroy();
     game.backgroundMusic = game.add.audio('intervague');
     game.backgroundMusic.play();
@@ -59,23 +59,25 @@ class PreparationState extends Phaser.State {
 
     // Timer -- Faire plus propre (Reset pour atteindre un nombre de secondes écoulés dans le jeu depuis le clic sur play)
     game.time.reset();
-    this.text = game.add.text(300,50, "", {fill: "#ffffff", backgroundColor: "#014900"});
     
-    game.varGold = 250;
+    this.text = game.add.text(210,25, "", {fill: "#ffffff"});
+    
+    game.varGold = 500;
+
     game.add.sprite(370,540,'gold');
     this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
   }
-  
+
   update(game) {
-  	
+
     game.entityManager.update();
 
-    
+
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 500;
+    var tempsPreparation = 30;
 
     var texte = "Time preparation left : ";
 
@@ -96,11 +98,11 @@ class PreparationState extends Phaser.State {
 
     // Si compteur inférieur à 1 minute et que les secondes sont pairs
     if(minutes == 0 && secondes%2 == 0){
-        this.text.setStyle({ fill: "#ffffff", backgroundColor: "#000000"});
+        this.text.setStyle({ fill: "#ffffff"});
     }
     // Si compteur inférieur à 1 minute et que les secondes sont impairs
     else if(minutes == 0 && secondes%2 != 0){
-        this.text.setStyle({ fill: "#ff0000", backgroundColor: "#000000"});
+        this.text.setStyle({ fill: "#ff0000"});
     }
 
     this.text.setText(texte);
