@@ -1,6 +1,7 @@
 class Projectile extends Entity {
   constructor(game, config) {
     super(game, config);
+    this.anchor.setTo(0.5,0.5);
     this.target = config.target;
   }
   static preload(game) {
@@ -9,8 +10,9 @@ class Projectile extends Entity {
 
   hit(entity) {
       for (let type of this.target) {
-          if (entity instanceof target) {
+          if (entity instanceof type) {
               this.applyEffect(entity);
+              this.kill();
               return true;
           }
       }

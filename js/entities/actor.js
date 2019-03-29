@@ -71,7 +71,9 @@ class Actor extends Entity {
         console.log(this.strength - entity.defense);
     }
     else if (entity !== undefined && this.projectile !== undefined) {
-        this.game.entityManager.add(new this.projectile(game, this.x, this.y, this.enemies));
+        var proj = this.game.entityManager.add(new this.projectile(game, this.centerX, this.centerY, this.enemies));
+        var dir = Vector.from_to(this, entity).normalize().multiply(200);
+        proj.body.velocity.setTo(dir.x, dir.y);
     }
     // animation
     var direction = this.facingDirection; // par defaut
