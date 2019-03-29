@@ -15,6 +15,14 @@ class FilterTargetsBase {
     this.filters = [];
     this.sorts = [];
     for (var t of targets) {
+      // si c'est une classe
+      if      (t === Adventurer) t = game.entityManager.adventurers;
+      else if (t === Monster)    t = game.entityManager.monsters;
+      else if (t === Boss)       t = game.entityManager.bosses;
+      else if (t === Projectile) t = game.entityManager.projectiles;
+      else if (t === Trap)       t = game.entityManager.traps;
+
+      // décomposition des tableaux
       if      (t instanceof Phaser.Group)  this.poss.push(...t.children);
       else if (t instanceof Array)         this.poss.push(...t);
       else if (t instanceof FilterTargets) {t.evalPoss(); this.poss.push(...t.poss);}
