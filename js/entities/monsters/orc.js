@@ -11,8 +11,13 @@ class Orc extends Monster {
         defense: 4,
         dodgeRate: 0.3
       },
-      baseAttack: 'cudgel',
-      oversize: true
+      attacks: {
+        default: {
+          handler: Attack.cac,
+          anim: 'cudgel',
+          oversize: true
+        }
+      }
     });
     // this.animations.add('walk-up',[0,1,2,3,4,5,6,7,8],10);
     // this.animations.add('walk-left',[9,10,11,12,13,14,15,16,17],10);

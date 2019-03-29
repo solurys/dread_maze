@@ -22,6 +22,7 @@ class Actor extends Entity {
     this.strength = config.stats.strength; // force d'attaque
     this.defense = config.stats.defense; // défense
     this.dodgeRate = config.stats.dodgeRate; // taux d'esquive
+    this.attackList = config.attacks;
 
     this.isAttacking = false;
     this.facingDirection = 'down';
@@ -34,10 +35,16 @@ class Actor extends Entity {
     this.body.setSize(35, 55, 15, 10);
     this.oversize = config.oversize;
   }
-  damage(amount) {
+  cacDamage(amount) {
     console.log(amount - this.defense);
     if (amount - this.defense > 0) {
-      super.damage(amount - this.defense);
+      this.damage(amount - this.defense);
+    }
+  }
+  magicDamage(amount) {
+    console.log(amount - this.defense);
+    if (amount - this.defense > 0) {
+      this.damage(amount - this.defense);
     }
   }
   update() {
@@ -62,31 +69,29 @@ class Actor extends Entity {
       this.animations.stop(undefined, true);
     }
   }
-  attack(entity) {
+  hasAttack(attackName = 'default') {
+    return this.attackList[attackName] !== undefined;
+  }
+  attack(entity, attackName = 'default') {
     if (this.isAttacking)
       return false;
 
-    if(entity !== undefined && this.projectile === undefined && Math.random() > entity.dodgeRate){
-        entity.damage(this.strength);
-        console.log(this.strength - entity.defense);
+    let attack = this.attackList[attackName];
+    if (entity !== undefined) {
+      attack.handler(this, entity, attack);
     }
-    else if (entity !== undefined && this.projectile !== undefined) {
-        var proj = this.game.entityManager.add(new this.projectile(game, this.centerX, this.centerY, this.enemies));
-        var dir = Vector.from_to(this, entity).normalize().multiply(200);
-        proj.body.velocity.setTo(dir.x, dir.y);
-    }
+
     // animation
     var direction = this.facingDirection; // par defaut
     if (entity !== undefined)
       direction = Math2D.guessDirection(Vector.from_to(this, entity));
-    var anim = this.animations.play(this.baseAttack + '-' + direction, undefined);
+    var anim = this.animations.play(attack.anim + '-' + direction, undefined);
 
     // bloque les mouvement lors de l'attaque
     if (anim !== undefined) {
       this.isAttacking = true;
-      if (this.oversize)
       this.body.velocity.setTo(0, 0);
-      if (this.oversize) {
+      if (attack.oversize) {
         this.body.setSize(35, 55, 15*5, 10*7);
       }
       anim.onComplete.addOnce(() => {

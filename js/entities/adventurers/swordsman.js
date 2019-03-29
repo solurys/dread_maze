@@ -10,6 +10,12 @@ class Swordsman extends Adventurer {
         strength: 1,
         defense: 1,
         dodgeRate: 1
+      },
+      attacks: {
+        default: {
+          handler: Attack.cac,
+          anim: ''
+        }
       }
     });
   }

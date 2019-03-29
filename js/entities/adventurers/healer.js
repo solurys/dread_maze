@@ -11,7 +11,12 @@ class Healer extends Adventurer {
         defense: 3,
         dodgeRate: 0.5
       },
-      baseAttack: 'spellcast'
+      attacks: {
+        default: {
+          handler: Attack.magicSpell,
+          anim: 'spellcast'
+        }
+      }
     });
     LPC_Atlas.setup_basic_lpc_animations(this);
     this.ia = new AdventurerCac(this, 70);

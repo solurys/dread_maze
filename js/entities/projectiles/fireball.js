@@ -15,6 +15,6 @@ class Fireball extends Projectile {
   }
 
   applyEffect(entity) {
-      entity.damage(8);
+      entity.magicDamage(8);
   }
 }
