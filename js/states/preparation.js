@@ -18,8 +18,6 @@ class PreparationState extends Phaser.State {
     //   [null, room, null],
     //   [null, room, null]
     // ]);
-    //firefox ne supporte pas les mp3
-
 
     game.roomManager.setRooms(1,1,[[room]]);
 
