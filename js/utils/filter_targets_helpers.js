@@ -37,6 +37,19 @@ class FilterTargets extends FilterTargetsBase {
     return this.filter(e => e instanceof type);
   }
 
+  // ofType mais avec un tableau
+  // par exemple : .ofTypeIn([Boss, Monster])
+  ofTypeIn(types) {
+    return this.filter(e => {
+      for (let t of types) {
+        if (e instanceof t) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
   // ne garde que les cibles proches selon un cercle de rayon "range" pixels
   nearby(range) {
     var s = this.self;
