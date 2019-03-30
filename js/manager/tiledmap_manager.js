@@ -18,9 +18,16 @@ class TiledmapManager {
       this.map.addTilesetImage(ts);
     }
 
+    // groupe du layer de téléportation
+    this.tpLayerGroup = game.add.group();
+    //this.tpLayerGroup.renderable = false; // invisible
+    this.tpLayerGroup.enableBody = true;
+
+    // createFromObjects(name, gid, key [, frame] [, exists] [, autoCull] [, group] [, CustomClass] [, adjustY] [, adjustSize])
+
     // création de bas en haut
     this.logicLayer = this.map.createLayer('logic');
-    this.tpLayer = this.map.createLayer('teleport');
+    this.map.createFromObjects('teleport',1164,'teleporter',null,true,false,this.tpLayerGroup);
     this.floorLayer = this.map.createLayer('sol');
     this.decoLayer = this.map.createLayer('decoration');
 
@@ -29,8 +36,8 @@ class TiledmapManager {
     game.physics.arcade.enable(this.logicLayer);
     this.map.setCollisionByExclusion([0], true, this.logicLayer); // tout sauf les cases vides
 
-    // layer de téléportation
-    this.tpLayer.renderable = false; // invisible
+    // téléporteurs immobiles
+    this.tpLayerGroup.setAll('body.immovable', true);
 
     // groupe d'affichage
     this.layerGroup = game.add.group();
@@ -38,9 +45,9 @@ class TiledmapManager {
 
     // ajout de bas en haut
     this.layerGroup.add(this.logicLayer);
-    this.layerGroup.add(this.tpLayer);
     this.layerGroup.add(this.floorLayer);
     this.layerGroup.add(this.decoLayer);
+    this.layerGroup.add(this.tpLayerGroup);
 
     game.world.sendToBack(this.layerGroup);
   }

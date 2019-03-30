@@ -5,6 +5,7 @@ class InitState extends Phaser.State {
     HUD.preload(game);
 
     game.load.image('back', 'sprites/Menu/buttonRetour.png');
+    game.load.image('teleporter', 'tiled/teleporter.png');
 
 
     game.stage.backgroundColor = "#4488AA";
@@ -12,13 +13,12 @@ class InitState extends Phaser.State {
     game.load.audio ('intervague', ['sprites/Music/intervague.mp3','sprites/Music/intervague.ogg']);
     game.load.audio ('intervague', ['sprites/Music/intervague.mp3','sprites/Music/intervague.ogg']);
     game.load.audio ('vague', ['sprites/Music/vague.mp3','sprites/Music/vague.ogg']);
-    
-    
+
 
 
 
   }
-  
+
   create(game) {
     // passage au menu
     game.state.start('menu', false);
@@ -27,5 +27,5 @@ class InitState extends Phaser.State {
 
 
   }
-  
+
 }
