@@ -4,6 +4,9 @@ class Andrax extends Boss {
       x: x,
       y: y,
       sprite: 'andrax',
+      ia: {
+        handler: KeyboardZQSDControl
+      },
       stats: {
         hpMax: 50,
         mpMax: 70,
@@ -27,9 +30,6 @@ class Andrax extends Boss {
     LPC_Atlas.setup_basic_lpc_animations(this);
 
     LPC_Atlas.setup_animation(this, 'dragonSpear');
-
-    this.ia = new KeyboardZQSDControl(this);
-
   }
   static preload(game) {
     game.load.atlasJSONHash('andrax', 'sprites/Boss/Andrax/andrax.png', 'sprites/Boss/Andrax/andrax_atlas.json');

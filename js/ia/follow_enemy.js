@@ -1,5 +1,5 @@
 class FollowEnemy extends IA {
-  constructor(self, enemies) {
+  constructor(self, {enemies} = {}) {
     super(self);
     this.enemies = enemies;
   }

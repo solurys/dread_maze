@@ -2,7 +2,7 @@
 
 class MonstreCaster extends IA {
   // self : entité controllée par l'ia
-  constructor(self, speed = 100, range_attack = 30, range_detection = 100) {
+  constructor(self, {speed = 100, range_attack = 30, range_detection = 100} = {}) {
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
@@ -50,7 +50,7 @@ class MonstreCaster extends IA {
           pv += element.health;
           pvmax += element.maxHealth;
       }
-      
+
       return this.targets >= 4 && pv > pvmax/8;
   }
 
@@ -69,13 +69,13 @@ class MonstreCaster extends IA {
           pv += element.health;
           pvmax += element.maxHealth;
       }
-      
+
       return entities.length > 0 && pv < pvmax/2;
   }
 
   selectNormalAttack() {
      let entities = filterTargets(this, [this.game.entityManager.adventurers])
-    .sameRoom() // même salle 
+    .sameRoom() // même salle
     .alive() // en vie
     .sortByDistance() //le plus proche
     .toArray();
@@ -101,7 +101,7 @@ class MonstreCaster extends IA {
           this.mouvementAleatoire();
       }
   }
-  
+
   debug() {
     var s = this.self;
 
@@ -112,7 +112,7 @@ class MonstreCaster extends IA {
     rec_rd.inflate(rd, rd);
     var rec_ra = new Phaser.Rectangle(s.left-ra, s.top-ra, s.width+ra*2, s.height+ra*2);
     rec_ra.inflate(ra,ra);
-    
+
     var dg = this.self.game.debug;
     dg.rectangle(rec_rd, 'yellow', false);
     dg.rectangle(rec_ra, 'red', false);

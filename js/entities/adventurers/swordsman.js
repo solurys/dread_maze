@@ -1,3 +1,4 @@
+// classe de test, non fonctionnelle
 class Swordsman extends Adventurer {
   constructor(game, x, y) {
     super(game, {
@@ -20,7 +21,8 @@ class Swordsman extends Adventurer {
     });
   }
   static preload(game) {
-    game.load.image('swordsman', 'sprites/swordsman_idle0.png');
+    // image supprimée
+    //game.load.image('swordsman', 'sprites/swordsman_idle0.png');
   }
 }
 

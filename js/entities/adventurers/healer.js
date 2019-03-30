@@ -4,6 +4,10 @@ class Healer extends Adventurer {
       x: x,
       y: y,
       sprite: 'healer',
+      ia: {
+        handler: AdventurerCac,
+        speed: 70
+      },
       stats: {
         hpMax: 10,
         mpMax: 20,
@@ -19,7 +23,6 @@ class Healer extends Adventurer {
       }
     });
     LPC_Atlas.setup_basic_lpc_animations(this);
-    this.ia = new AdventurerCac(this, 70);
   }
   static preload(game) {
     game.load.atlasJSONHash('healer', 'sprites/Adventurers/Healer/healer.png','sprites/Monsters/Skeleton/skeleton_atlas.json');

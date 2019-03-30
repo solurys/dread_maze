@@ -23,6 +23,7 @@ class Actor extends Entity {
     this.defense = config.stats.defense; // défense
     this.dodgeRate = config.stats.dodgeRate; // taux d'esquive
     this.attackList = config.attacks;
+    this.ia = new config.ia.handler(this, config.ia);
 
     this.isAttacking = false;
     this.facingDirection = 'down';
