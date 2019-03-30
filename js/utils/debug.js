@@ -10,6 +10,7 @@ window.gameDebug = window.gdb = {
     bosses: 'rgba(0, 255, 0, 0.2)',
     projectiles: 'rgba(0, 0, 255, 0.2)',
     traps: 'rgba(0, 0, 0, 0.2)',
+    teleporters: 'rgba(127, 127, 127, 0.2)',
     filled: true // rectangle plein (filled) ou tracé (stroke)
   },
 
@@ -143,6 +144,12 @@ window.gameDebug = window.gdb = {
           if (this.ia) { this.drawIA(entity); }
           if (this.body) { this.drawBody(entity, gr); }
         }
+      });
+    }
+
+    if (this.body && game.tiledmapManager && game.tiledmapManager.tpLayerGroup) {
+      game.tiledmapManager.tpLayerGroup.forEach(t => {
+        game.debug.body(t, this.bodyColor.teleporters, this.bodyColor.filled);
       });
     }
   },
