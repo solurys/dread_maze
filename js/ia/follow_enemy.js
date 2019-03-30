@@ -1,7 +1,7 @@
 class FollowEnemy extends IA {
-  constructor(self, {enemies} = {}) {
+  constructor(self, config = {}) {
     super(self);
-    this.enemies = enemies;
+    this.enemies = self.enemies;
   }
   update() {
     var target =

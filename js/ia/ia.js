@@ -2,7 +2,7 @@
 
 class IA {
   // self : entité controllée par l'ia
-  constructor(self) {
+  constructor(self, config = {}) {
     this.self = self;
   }
   update() {}

@@ -2,7 +2,16 @@
 
 class MonstreCac extends IA {
   // self : entité controllée par l'ia
-  constructor(self, {speed = 100, range_attack = 30, range_detection = 100, est_dist = false} = {}) {
+  constructor(self, config = {}) {
+    // extraction des paramètres
+    // avec des valeurs par défaut
+    let {
+      speed = 100,
+      range_attack = 30,
+      range_detection = 100,
+      est_dist = false
+    } = config;
+
     super(self);
     this.etat = 1; // état inerte par défaut
     this.target = null;
