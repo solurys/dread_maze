@@ -44,8 +44,24 @@ window.gameDebug = window.gdb = {
   m: function() { return {
     em: game.entityManager,
     rm: game.roomManager,
-    cm: game.cameraManager
+    cm: game.cameraManager,
+    tm: game.tiledmapManager
   }},
+
+  // initialisation pour gameVars()
+  takeSampleGameFields: function() {
+    this.phaserGameFields = Object.keys(game);
+  },
+
+  // sépare dans game les champs de phaser et nos variables
+  // retourne nos variables
+  gameVars: function() {
+    let fields = Object.keys(game);
+    let varKeys = fields.filter(f => this.phaserGameFields.includes(f) == false);
+    let vars = {};
+    varKeys.forEach(k => vars[k] = game[k]);
+    return vars;
+  },
 
   // click de souris qui est controllé par le <select> sur la page
   onClick: function(pointer) {
