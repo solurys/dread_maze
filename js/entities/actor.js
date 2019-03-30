@@ -9,8 +9,14 @@ class Actor extends Entity {
       config.oversize = false;
     }
 
+    var anims = ['walk', 'die'];
+    for (let a of Object.keys(config.attacks)) {
+      anims.push(config.attacks[a].anim);
+    }
+
     super(game, config);
-    //this.ia = config.ia; // impossible : ia prend en paramètre this
+
+    LPC_Atlas.setup_list_animations(this, anims);
     this.baseAttack = config.baseAttack;
     this.projectile = config.projectile;
     this.enemies = config.enemies;

@@ -22,7 +22,6 @@ class Healer extends Adventurer {
         }
       }
     });
-    LPC_Atlas.setup_basic_lpc_animations(this);
   }
   static preload(game) {
     game.load.atlasJSONHash('healer', 'sprites/Adventurers/Healer/healer.png','sprites/Monsters/Skeleton/skeleton_atlas.json');
