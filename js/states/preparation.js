@@ -3,7 +3,7 @@ class PreparationState extends Phaser.State {
     gameDebug.init();
     game.tiledmapManager = new TiledmapManager(game, {
       map: 'tiled/map.json',
-      tileset: ['tiled/cute_lpc.png', 'tiled/dungeon_tiles.png', 'tiled/Dungeon_Tileset.png', 'tiled/logic.png', 'tiled/magecity.png', 'tiled/Dungeon bis.png']
+      tileset: ['tiled/cute_lpc.png'/*, 'tiled/dungeon_tiles.png'*/, 'tiled/Dungeon_Tileset.png', 'tiled/logic.png', 'tiled/magecity.png', 'tiled/Dungeon bis.png']
     });
     game.entityManager = new EntityManager(game);
     game.roomManager = new RoomManager(game);
