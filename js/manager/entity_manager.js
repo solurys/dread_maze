@@ -18,7 +18,8 @@ class EntityManager {
     return entity;
   }
   update() {
-    var phys = this.game.physics.arcade;
+    var game = this.game;
+    var phys = game.physics.arcade;
 
     // activation des pièges
     function trapActivated(trap, adventurer) {
@@ -42,6 +43,21 @@ class EntityManager {
     phys.collide(this.adventurers, this.bosses);
     phys.collide(this.monsters, this.bosses);
     phys.collide(this.adventurers, this.monsters);
-    phys.collide(this.game.tiledmapManager.logicLayer, [this.adventurers, this.bosses, this.monsters])
+
+    // parties solides de la map
+    phys.collide(game.tiledmapManager.logicLayer, [this.adventurers, this.bosses, this.monsters])
+
+    function teleport(tp, entity) {
+      let now = game.time.time;
+      let last = entity.lastTeleport || 0;
+      if (now - last > 500) {
+        console.log('tp');
+        entity.x = tp[0].value * 16;
+        entity.y = tp[1].value * 16;
+      }
+      entity.lastTeleport = now;
+    }
+    // téléporteurs
+    phys.collide(game.tiledmapManager.tpLayerGroup, [this.adventurers, this.bosses, this.monsters], teleport);
   }
 }
