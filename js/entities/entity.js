@@ -3,6 +3,10 @@ class Entity extends Phaser.Sprite {
     super(game, config.x, config.y, config.sprite, config.frame);
     this.scale.setTo(0.6,0.6);
     this.debugEnabled = true; // gameDebug
+    this.onUpdate = new Phaser.Signal();
+  }
+  update() {
+    this.onUpdate.dispatch(this);
   }
   static preload(game) {
     Adventurer.preload(game);

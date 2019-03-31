@@ -8,8 +8,6 @@ class FightState extends Phaser.State {
     game.backgroundMusic = game.add.audio('vague');
     game.backgroundMusic.play();
 
-    this.cursors = game.input.keyboard.createCursorKeys();
-
     this.compteurVague = 0;
 
     // Spawn après le timer de préparation
@@ -47,8 +45,8 @@ class FightState extends Phaser.State {
 
   update(game) {
     game.entityManager.update();
-    game.cameraManager.handleInput(this.cursors);
     game.cameraManager.updateFollow();
+    game.hud.update();
 
 
     // Nombre de vagues souhaités
@@ -87,8 +85,11 @@ class FightState extends Phaser.State {
       this.text.kill();
     }
 
+    if (game.boss.alive == false) {
+      this.game.state.start('fin', true, false, 'dead');
+    }
     if(this.compteurVague == nbVagues && game.entityManager.adventurers.getFirstAlive() == null){
-      game.state.start('fin', true);
+      game.state.start('fin', true, false, 'win');
     }
 
   }

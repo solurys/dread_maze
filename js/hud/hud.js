@@ -5,18 +5,26 @@ class HUD {
         // Revoir le nom des variables
         // Faire héritage pour piège et monstre
         this.sprite = game.add.sprite(0,0,'hud');
-        this.piege = [];
-        this.piege.push(new Action());
+        this.placementBar = new PlacementBar();
+        this.hudBoss = new HUDBoss();
+        this.hudGold = new HUDGold();
+
+        // Regarder pour barre
+        // http://naivedev.blogspot.com/2016/06/phaser-experiment-making-health-bar.html
     }
 
     static preload(game) {
         game.load.image('hud', 'sprites/HUD/hud.png');
 
-        // Charger tous les sorts ici
-        game.load.image('m1', 'sprites/HUD/orc.png');
-        game.load.image('m2', 'sprites/HUD/skeleton.png');
-        game.load.image('m3', 'sprites/HUD/wizard.png');
-        game.load.image('p1', 'sprites/HUD/spikeTrap.png');
+        PlacementBar.preload(game);
+        HUDBoss.preload(game);
+        HUDGold.preload(game);
+    }
+
+    update() {
+        this.placementBar.update();
+        this.hudBoss.update();
+        this.hudGold.update();
     }
 
 }

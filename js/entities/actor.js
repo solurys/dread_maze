@@ -30,6 +30,7 @@ class Actor extends Entity {
     this.dodgeRate = config.stats.dodgeRate; // taux d'esquive
     this.attackList = config.attacks;
     this.ia = new config.ia.handler(this, config.ia);
+    this.iaEnabled = true;
 
     this.isAttacking = false;
     this.facingDirection = 'down';
@@ -55,8 +56,9 @@ class Actor extends Entity {
     }
   }
   update() {
-    if (this.ia !== undefined && this.alive)
+    if (this.iaEnabled && this.ia !== undefined && this.alive)
       this.ia.update();
+    super.update();
   }
   // attaques ? animations ? TODO
   walk(velocity) {

@@ -9,9 +9,6 @@ class PreparationState extends Phaser.State {
     game.roomManager = new RoomManager(game);
     var room = 'room';
 
-
-    game.load.image('gold', 'sprites/HUD/gold.png');
-
     // game.roomManager.setRooms(4, 3, [
     //   [room, null, null],
     //   [room, room, room],
@@ -38,7 +35,7 @@ class PreparationState extends Phaser.State {
     game.backgroundMusic = game.add.audio('intervague');
     game.backgroundMusic.play();
     // Création de l'HUD
-    var h = new HUD(game);
+    game.hud = new HUD(game);
 
     // temporaire
 
@@ -50,6 +47,7 @@ class PreparationState extends Phaser.State {
 
     var and = game.entityManager.add(new Andrax(game, 100, 100));
     game.cameraManager.follow(and);
+    game.boss = and;
 
     // var sw4 = game.entityManager.add(new Swordsman(game, 300, 300));
     //  sw4.ia = new  MonstreCac(sw4);//FollowEnemy(sw4, [game.entityManager.adventurers]);
@@ -70,19 +68,21 @@ class PreparationState extends Phaser.State {
     game.varGold = 500;
 
     game.add.sprite(370,540,'gold');
-    this.textGold = game.add.text(410,540, "", {fill:"#CCCC00"});
 
+    this.cursors = game.input.keyboard.createCursorKeys();
   }
 
   update(game) {
-
     game.entityManager.update();
+    game.cameraManager.handleInput(this.cursors);
+    game.cameraManager.updateFollow();
+    game.hud.update();
 
 
     // le joueur met en place le dungeon
 
     // Temps de préparation en secondes
-    var tempsPreparation = 5;
+    var tempsPreparation = 60;
 
     var texte = "Time preparation left : ";
 
@@ -111,7 +111,6 @@ class PreparationState extends Phaser.State {
     }
 
     this.text.setText(texte);
-    this.textGold.setText(game.varGold);
 
     if(game.time.totalElapsedSeconds() >= tempsPreparation){
         game.state.start('fight', false);

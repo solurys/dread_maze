@@ -3,13 +3,6 @@ class Trap extends Entity {
     super(game, config);
     this.nbUses = config.nbUses;
     this.active = false;
-
-    // Pour la capture des mouvements / actions de la souris (Placement des monstres)
-    // Bon emplacement ?
-    game.input.mouse.capture = true;
-
-    this.placer =false;
-    this.alpha = 0.5;
   }
 
   static preload(game) {
@@ -29,21 +22,5 @@ class Trap extends Entity {
       }
     });
     this.nbUses--;
-  }
-
-  update(game){
-
-    if(!this.placer){
-        this.x = this.game.input.x;
-        this.y = this.game.input.y;
-    }
-
-    if(this.game.input.activePointer.leftButton.justPressed()){
-        this.placer = true;
-        this.alpha = 1;
-    }
-
-
-    super.update(this.game);
   }
 }
